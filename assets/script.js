@@ -2,11 +2,11 @@ const BLACKLISTED_KEY_CODES = [38,40,37,39,18,20,17,16,9,27,144];
 //List of commands
 const COMMANDS = {
     "help":
-        'The page you want to visit does not exist, or it may have been deleted, or the wrong address was entered. To see the commands, enter the word <span class=\"red\"> commands</span>',
+        'The page you want to visit does not exist, or it may have been deleted, or the wrong address was entered. You can contact me by email : alieffahdal@unhas.ac.id or to see the commands, enter the word <span class=\"red\"> commands</span>',
     "exit":
         "",
     "report":
-        "<span class='green'>This page report has been successfully sent to support.</span>",
+        "<span class='green'>This page report has been successfully sent to support or you can contact me by email : alieffahdal@unhas.ac.id .</span>",
     "commands":
         "List of commands: <span class=\"red\"> help</span> , <span class=\"red\"> report</span> ,<span class=\"red\"> exit</span>\n",
     "cls":
