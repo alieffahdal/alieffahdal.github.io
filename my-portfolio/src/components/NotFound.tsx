@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom';
-import '../styles/NotFound.css';
+import { useNavigate } from "react-router-dom";
+import "../styles/NotFound.css";
 
 export default function NotFound() {
   const navigate = useNavigate();
@@ -13,14 +13,14 @@ export default function NotFound() {
               <span className="code-line">404</span>
               <span className="code-desc">Page Not Found</span>
             </div>
-            
+
             <div className="error-message">
               <h1>Oops! Page not found</h1>
               <p>
-                The page you're looking for seems to have wandered off. 
-                It might have been moved, renamed, or never existed in the first place.
+                The page you're looking for seems to have wandered off. It might
+                have been moved, renamed, or never existed in the first place.
               </p>
-              
+
               <div className="error-illustration">
                 <div className="floating-robot">
                   <div className="robot-head">🤖</div>
@@ -30,13 +30,13 @@ export default function NotFound() {
               </div>
 
               <div className="error-actions">
-                <button 
-                  onClick={() => navigate('/')}
+                <button
+                  onClick={() => navigate("/")}
                   className="btn btn-primary"
                 >
                   Back to Home
                 </button>
-                <button 
+                <button
                   onClick={() => window.history.back()}
                   className="btn btn-secondary"
                 >
