@@ -26,10 +26,10 @@ export default function Contact() {
   };
 
   const contactLinks = [
-    { icon: '📧', label: 'Email', value: 'alief@example.com', href: 'mailto:alief@example.com' },
-    { icon: '💼', label: 'LinkedIn', value: '@alieffahdal', href: 'https://linkedin.com' },
-    { icon: '🐙', label: 'GitHub', value: '@alieffahdal', href: 'https://github.com/alieffahdal' },
-    { icon: '🐦', label: 'Twitter', value: '@alieffahdal', href: 'https://twitter.com' }
+    { icon: '📧', label: 'Email', value: 'alief@university.edu', href: 'mailto:alief@university.edu' },
+    { icon: '📍', label: 'Office', value: 'Room 305, IT Building', href: '#' },
+    { icon: '📞', label: 'Phone', value: '+62 XXX-XXXX', href: 'tel:+62XXXXXXXXX' },
+    { icon: '💼', label: 'LinkedIn', value: '/in/alieffahdal', href: 'https://linkedin.com' }
   ];
 
   return (
@@ -39,7 +39,7 @@ export default function Contact() {
         <div className="contact-content">
           <div className="contact-info">
             <p className="contact-intro">
-              Have a project in mind or want to collaborate? I would love to hear from you!
+              Office hours: Monday - Friday, 2:00 PM - 4:00 PM. Feel free to reach out for academic inquiries, research collaboration, or course discussions!
             </p>
             <div className="contact-links">
               {contactLinks.map((link) => (

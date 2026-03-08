@@ -3,20 +3,20 @@ import '../styles/Skills.css';
 export default function Skills() {
   const skills = [
     {
-      category: 'Frontend',
-      technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'HTML5', 'CSS3']
+      category: 'Teaching Specializations',
+      technologies: ['Software Engineering', 'Web Development', 'Database Design', 'OOP Principles', 'IT Project Management', 'Cloud Technologies']
     },
     {
-      category: 'Backend',
-      technologies: ['Node.js', 'Python', 'Express.js', 'REST APIs', 'PostgreSQL', 'MongoDB']
+      category: 'Programming Languages',
+      technologies: ['Java', 'Python', 'JavaScript/TypeScript', 'C++', 'SQL', 'PHP']
     },
     {
-      category: 'Tools & Platforms',
-      technologies: ['Git', 'Docker', 'GitHub Actions', 'VS Code', 'Figma', 'Firebase']
+      category: 'Frameworks & Tools',
+      technologies: ['React', 'Node.js', 'Django', 'Laravel', 'Spring Boot', 'Docker', 'Git']
     },
     {
-      category: 'Soft Skills',
-      technologies: ['Problem Solving', 'Team Collaboration', 'Communication', 'Attention to Detail']
+      category: 'Pedagogical Skills',
+      technologies: ['Curriculum Design', 'Student Mentoring', 'Online Teaching', 'Assessment Design', 'Research Supervision', 'Collaborative Learning']
     }
   ];
 

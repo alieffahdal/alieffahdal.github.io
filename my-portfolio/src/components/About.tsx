@@ -8,38 +8,38 @@ export default function About() {
         <div className="about-content">
           <div className="about-text">
             <p>
-              I'm a passionate Full-Stack Developer with a keen interest in building scalable web applications
-              and creating intuitive user experiences. With expertise in modern web technologies, I transform
-              ideas into elegant solutions.
+              I am an IT Lecturer with a passion for educating and mentoring the next generation of technology professionals.
+              With extensive experience in both academic teaching and industry practice, I bridge the gap between theoretical
+              knowledge and practical application.
             </p>
             <p>
-              My journey in tech has taught me that great software is a combination of clean code, thoughtful design,
-              and a deep understanding of user needs. I enjoy collaborating with teams and continuously learning new technologies.
+              My teaching philosophy centers on student-centered learning, hands-on projects, and real-world problem-solving.
+              I believe in creating an inclusive classroom environment where every student can thrive and develop critical thinking skills.
             </p>
             <div className="stats">
               <div className="stat">
-                <span className="stat-number">10+</span>
-                <span className="stat-label">Projects</span>
+                <span className="stat-number">8+</span>
+                <span className="stat-label">Years Teaching</span>
               </div>
               <div className="stat">
-                <span className="stat-number">2+</span>
-                <span className="stat-label">Years Experience</span>
+                <span className="stat-number">500+</span>
+                <span className="stat-label">Students Taught</span>
               </div>
               <div className="stat">
-                <span className="stat-number">100%</span>
-                <span className="stat-label">Dedication</span>
+                <span className="stat-number">15+</span>
+                <span className="stat-label">Publications</span>
               </div>
             </div>
           </div>
           <div className="about-highlights">
             <div className="highlight-card">
-              <h3>What I Do</h3>
+              <h3>Academic Focus</h3>
               <ul>
-                <li>Full-stack web application development</li>
-                <li>UI/UX design and implementation</li>
-                <li>REST API design and development</li>
-                <li>Database design and optimization</li>
-                <li>Responsive web design</li>
+                <li>Software Engineering & Design Patterns</li>
+                <li>Web Development & Full-Stack Technologies</li>
+                <li>Database Management & SQL Optimization</li>
+                <li>IT Project Management</li>
+                <li>Research in emerging IT technologies</li>
               </ul>
             </div>
           </div>

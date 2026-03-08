@@ -5,11 +5,11 @@ export default function Hero() {
     <section className="hero">
       <div className="container hero-content">
         <div className="hero-text">
-          <h1>Hi, I'm <span className="gradient-text">Alief Fahdal</span></h1>
-          <p className="hero-subtitle">Full-Stack Developer | UI/UX Enthusiast | Problem Solver</p>
+          <h1>Welcome to <span className="gradient-text">Prof. Alief Fahdal's</span> Office</h1>
+          <p className="hero-subtitle">IT Lecturer | Researcher | Educator | Tech Innovator</p>
           <p className="hero-description">
-            I build beautiful, functional web applications with modern technologies. 
-            Passionate about creating exceptional user experiences and writing clean code.
+            Dedicated to fostering the next generation of IT professionals through engaging education,
+            cutting-edge research, and practical industry experience.
           </p>
           <div className="hero-buttons">
             <button className="btn btn-primary" onClick={() => {

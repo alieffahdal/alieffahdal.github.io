@@ -4,42 +4,42 @@ export default function Projects() {
   const projects = [
     {
       id: 1,
-      title: 'Portfolio Website',
-      description: 'Modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS. Features smooth scrolling, dark mode, and optimized performance.',
-      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
-      link: 'https://github.com/alieffahdal',
-      status: 'Current Project'
+      title: 'Advanced Web Development',
+      description: 'Comprehensive course covering full-stack development using modern frameworks. Students learn from design to deployment with real-world projects.',
+      technologies: ['React', 'Node.js', 'MongoDB', 'Tailwind CSS'],
+      link: '#',
+      status: 'Active'
     },
     {
       id: 2,
-      title: 'E-Commerce Platform',
-      description: 'Full-stack e-commerce application with user authentication, product catalog, shopping cart, and payment integration.',
-      technologies: ['Node.js', 'React', 'MongoDB', 'Stripe'],
+      title: 'Software Engineering Principles',
+      description: 'Core course teaching design patterns, SOLID principles, and software architecture. Includes team projects and code reviews.',
+      technologies: ['Java', 'UML', 'Design Patterns', 'Git'],
       link: '#',
-      status: 'Completed'
+      status: 'Active'
     },
     {
       id: 3,
-      title: 'Task Management App',
-      description: 'Collaborative task management application with real-time updates, team collaboration features, and progress tracking.',
-      technologies: ['React', 'Firebase', 'Tailwind CSS', 'TypeScript'],
+      title: 'Database Management Systems',
+      description: 'In-depth course on database design, normalization, and optimization. Students design and implement complex database systems.',
+      technologies: ['SQL', 'PostgreSQL', 'MySQL', 'Database Design'],
       link: '#',
-      status: 'Completed'
+      status: 'Active'
     },
     {
       id: 4,
-      title: 'Blog Platform',
-      description: 'Content management system for creating and sharing blog posts with markdown support, comments, and analytics.',
-      technologies: ['Next.js', 'PostgreSQL', 'Tailwind CSS', 'TypeScript'],
+      title: 'IT Project Management Capstone',
+      description: 'Capstone course where students work on real industry projects. Focus on agile methodologies, team leadership, and project delivery.',
+      technologies: ['Agile', 'Jira', 'Team Leadership', 'Risk Management'],
       link: '#',
-      status: 'Completed'
+      status: 'Active'
     }
   ];
 
   return (
     <section id="projects" className="projects">
       <div className="container">
-        <h2>Featured Projects</h2>
+        <h2>Current Courses</h2>
         <div className="projects-grid">
           {projects.map((project) => (
             <div key={project.id} className="project-card">
