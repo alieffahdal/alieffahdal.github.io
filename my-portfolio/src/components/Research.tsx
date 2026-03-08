@@ -1,74 +1,77 @@
-import '../styles/Research.css';
+import "../styles/Research.css";
 
 export default function Research() {
   const publications = [
     {
       id: 1,
-      title: 'Emerging Trends in Cloud-Native Application Development',
-      authors: 'Alief Fahdal et al.',
+      title: "Emerging Trends in Cloud-Native Application Development",
+      authors: "Alief Fahdal et al.",
       year: 2024,
-      venue: 'IEEE Transactions on Software Engineering',
-      type: 'Journal Article',
-      doi: '10.1109/TSE.2024.xxxxx'
+      venue: "IEEE Transactions on Software Engineering",
+      type: "Journal Article",
+      doi: "10.1109/TSE.2024.xxxxx",
     },
     {
       id: 2,
-      title: 'Student-Centered Learning in Software Engineering Education',
-      authors: 'Alief Fahdal, Dr. Sarah Johnson',
+      title: "Student-Centered Learning in Software Engineering Education",
+      authors: "Alief Fahdal, Dr. Sarah Johnson",
       year: 2023,
-      venue: 'ACM Conference on Computer Science Education',
-      type: 'Conference Paper',
-      doi: '10.1145/SIGCSE.2023'
+      venue: "ACM Conference on Computer Science Education",
+      type: "Conference Paper",
+      doi: "10.1145/SIGCSE.2023",
     },
     {
       id: 3,
-      title: 'Microservices Architecture: Design Patterns and Best Practices',
-      authors: 'Alief Fahdal',
+      title: "Microservices Architecture: Design Patterns and Best Practices",
+      authors: "Alief Fahdal",
       year: 2023,
-      venue: 'International Journal of Computer Science',
-      type: 'Journal Article',
-      doi: '10.1016/j.ijcs.2023.xxxxx'
+      venue: "International Journal of Computer Science",
+      type: "Journal Article",
+      doi: "10.1016/j.ijcs.2023.xxxxx",
     },
     {
       id: 4,
-      title: 'Integrating DevOps in Computer Science Curriculum',
-      authors: 'Alief Fahdal, Prof. Michael Chen',
+      title: "Integrating DevOps in Computer Science Curriculum",
+      authors: "Alief Fahdal, Prof. Michael Chen",
       year: 2022,
-      venue: 'International Conference on Software Engineering Education',
-      type: 'Conference Paper',
-      doi: '10.1145/ICSE-ED.2022'
-    }
+      venue: "International Conference on Software Engineering Education",
+      type: "Conference Paper",
+      doi: "10.1145/ICSE-ED.2022",
+    },
   ];
 
   const research = [
     {
       id: 1,
-      title: 'AI-Driven Code Review Systems',
-      description: 'Investigating the use of machine learning for automated code review and quality assurance.',
-      status: 'In Progress',
-      students: 3
+      title: "AI-Driven Code Review Systems",
+      description:
+        "Investigating the use of machine learning for automated code review and quality assurance.",
+      status: "In Progress",
+      students: 3,
     },
     {
       id: 2,
-      title: 'Blockchain in Educational Systems',
-      description: 'Exploring decentralized approaches to student credentialing and academic verification.',
-      status: 'In Progress',
-      students: 2
+      title: "Blockchain in Educational Systems",
+      description:
+        "Exploring decentralized approaches to student credentialing and academic verification.",
+      status: "In Progress",
+      students: 2,
     },
     {
       id: 3,
-      title: 'Low-Code Development Platforms Effectiveness',
-      description: 'Comparative study on productivity and code quality using low-code platforms in enterprise development.',
-      status: 'Active',
-      students: 4
-    }
+      title: "Low-Code Development Platforms Effectiveness",
+      description:
+        "Comparative study on productivity and code quality using low-code platforms in enterprise development.",
+      status: "Active",
+      students: 4,
+    },
   ];
 
   return (
     <section id="research" className="research">
       <div className="container">
         <h2>Research & Publications</h2>
-        
+
         <div className="research-section">
           <h3>Recent Publications</h3>
           <div className="publications-list">
@@ -102,7 +105,9 @@ export default function Research() {
                 </div>
                 <p className="research-description">{project.description}</p>
                 <p className="research-meta">
-                  <span className="student-count">👥 {project.students} Student(s)</span>
+                  <span className="student-count">
+                    👥 {project.students} Student(s)
+                  </span>
                 </p>
               </div>
             ))}

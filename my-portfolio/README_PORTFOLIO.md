@@ -79,16 +79,19 @@ my-portfolio/
 ### Installation
 
 1. **Clone the repository:**
+
    ```bash
    cd my-portfolio
    ```
 
 2. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
 3. **Start the development server:**
+
    ```bash
    npm run dev
    ```
@@ -96,6 +99,7 @@ my-portfolio/
    The site will be available at `http://localhost:5173`
 
 4. **Build for production:**
+
    ```bash
    npm run build
    ```
@@ -128,12 +132,14 @@ npm run lint
 The portfolio is automatically deployed to GitHub Pages when you push to the `main` branch.
 
 1. **Commit your changes:**
+
    ```bash
    git add .
    git commit -m "Update portfolio"
    ```
 
 2. **Push to main:**
+
    ```bash
    git push origin main
    ```
@@ -147,6 +153,7 @@ Visit your portfolio at: [https://alieffahdal.github.io](https://alieffahdal.git
 If you prefer to deploy manually:
 
 1. **Build the project:**
+
    ```bash
    npm run build
    ```
@@ -173,6 +180,7 @@ If you prefer to deploy manually:
 ## 📱 Responsive Design
 
 The portfolio is fully responsive:
+
 - **Desktop**: Full layout with all features visible
 - **Tablet**: Optimized grid layouts
 - **Mobile**: Stack-based layouts for better readability

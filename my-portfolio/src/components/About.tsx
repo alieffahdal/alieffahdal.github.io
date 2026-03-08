@@ -1,4 +1,4 @@
-import '../styles/About.css';
+import "../styles/About.css";
 
 export default function About() {
   return (
@@ -8,13 +8,17 @@ export default function About() {
         <div className="about-content">
           <div className="about-text">
             <p>
-              I am an IT Lecturer with a passion for educating and mentoring the next generation of technology professionals.
-              With extensive experience in both academic teaching and industry practice, I bridge the gap between theoretical
-              knowledge and practical application.
+              I am an IT Lecturer with a passion for educating and mentoring the
+              next generation of technology professionals. With extensive
+              experience in both academic teaching and industry practice, I
+              bridge the gap between theoretical knowledge and practical
+              application.
             </p>
             <p>
-              My teaching philosophy centers on student-centered learning, hands-on projects, and real-world problem-solving.
-              I believe in creating an inclusive classroom environment where every student can thrive and develop critical thinking skills.
+              My teaching philosophy centers on student-centered learning,
+              hands-on projects, and real-world problem-solving. I believe in
+              creating an inclusive classroom environment where every student
+              can thrive and develop critical thinking skills.
             </p>
             <div className="stats">
               <div className="stat">

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import '../styles/Navbar.css';
+import { useState } from "react";
+import "../styles/Navbar.css";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,7 +7,7 @@ export default function Navbar() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
       setIsOpen(false);
     }
   };
@@ -20,21 +20,63 @@ export default function Navbar() {
             <span className="gradient-text">AF</span>
           </a>
         </div>
-        
+
         <button className="mobile-toggle" onClick={() => setIsOpen(!isOpen)}>
           <span></span>
           <span></span>
           <span></span>
         </button>
 
-        <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>
+        <div className={`navbar-menu ${isOpen ? "active" : ""}`}>
           <ul className="nav-links">
-            <li><button onClick={() => scrollToSection('home')} className="nav-link">Home</button></li>
-            <li><button onClick={() => scrollToSection('about')} className="nav-link">About</button></li>
-            <li><button onClick={() => scrollToSection('skills')} className="nav-link">Expertise</button></li>
-            <li><button onClick={() => scrollToSection('projects')} className="nav-link">Courses</button></li>
-            <li><button onClick={() => scrollToSection('research')} className="nav-link">Research</button></li>
-            <li><button onClick={() => scrollToSection('contact')} className="nav-link">Contact</button></li>
+            <li>
+              <button
+                onClick={() => scrollToSection("home")}
+                className="nav-link"
+              >
+                Home
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => scrollToSection("about")}
+                className="nav-link"
+              >
+                About
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => scrollToSection("skills")}
+                className="nav-link"
+              >
+                Expertise
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => scrollToSection("projects")}
+                className="nav-link"
+              >
+                Courses
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => scrollToSection("research")}
+                className="nav-link"
+              >
+                Research
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="nav-link"
+              >
+                Contact
+              </button>
+            </li>
           </ul>
         </div>
       </div>

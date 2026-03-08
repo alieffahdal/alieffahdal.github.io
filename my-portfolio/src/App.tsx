@@ -1,16 +1,18 @@
-import './App.css'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import About from './components/About'
-import Skills from './components/Skills'
-import Projects from './components/Projects'
-import Research from './components/Research'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Skills from "./components/Skills";
+import Projects from "./components/Projects";
+import Research from "./components/Research";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import NotFound from "./components/NotFound";
 
-function App() {
+function HomePage() {
   return (
-    <div className="app">
+    <div>
       <Navbar />
       <main>
         <section id="home">
@@ -28,7 +30,18 @@ function App() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+function App() {
+  return (
+    <div className="app">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
+  );
+}
+
+export default App;

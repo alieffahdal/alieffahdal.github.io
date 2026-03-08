@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'my-portfolio/**'
-      - '.github/workflows/deploy.yml'
+      - "my-portfolio/**"
+      - ".github/workflows/deploy.yml"
 
 jobs:
   build-and-deploy:
@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: "18"
 
       - name: Install dependencies
         working-directory: ./my-portfolio

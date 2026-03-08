@@ -1,35 +1,52 @@
-import { useState } from 'react';
-import '../styles/Contact.css';
+import { useState } from "react";
+import "../styles/Contact.css";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
+    name: "",
+    email: "",
+    message: "",
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    console.log("Form submitted:", formData);
     setSubmitted(true);
-    setFormData({ name: '', email: '', message: '' });
+    setFormData({ name: "", email: "", message: "" });
     setTimeout(() => setSubmitted(false), 3000);
   };
 
   const contactLinks = [
-    { icon: '📧', label: 'Email', value: 'alief@university.edu', href: 'mailto:alief@university.edu' },
-    { icon: '📍', label: 'Office', value: 'Room 305, IT Building', href: '#' },
-    { icon: '📞', label: 'Phone', value: '+62 XXX-XXXX', href: 'tel:+62XXXXXXXXX' },
-    { icon: '💼', label: 'LinkedIn', value: '/in/alieffahdal', href: 'https://linkedin.com' }
+    {
+      icon: "📧",
+      label: "Email",
+      value: "alief@university.edu",
+      href: "mailto:alief@university.edu",
+    },
+    { icon: "📍", label: "Office", value: "Room 305, IT Building", href: "#" },
+    {
+      icon: "📞",
+      label: "Phone",
+      value: "+62 XXX-XXXX",
+      href: "tel:+62XXXXXXXXX",
+    },
+    {
+      icon: "💼",
+      label: "LinkedIn",
+      value: "/in/alieffahdal",
+      href: "https://linkedin.com",
+    },
   ];
 
   return (
@@ -39,11 +56,19 @@ export default function Contact() {
         <div className="contact-content">
           <div className="contact-info">
             <p className="contact-intro">
-              Office hours: Monday - Friday, 2:00 PM - 4:00 PM. Feel free to reach out for academic inquiries, research collaboration, or course discussions!
+              Office hours: Monday - Friday, 2:00 PM - 4:00 PM. Feel free to
+              reach out for academic inquiries, research collaboration, or
+              course discussions!
             </p>
             <div className="contact-links">
               {contactLinks.map((link) => (
-                <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="contact-link">
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-link"
+                >
                   <span className="contact-icon">{link.icon}</span>
                   <div>
                     <div className="contact-label">{link.label}</div>
@@ -93,7 +118,9 @@ export default function Contact() {
             <button type="submit" className="btn btn-primary">
               Send Message
             </button>
-            {submitted && <p className="success-message">Message sent successfully!</p>}
+            {submitted && (
+              <p className="success-message">Message sent successfully!</p>
+            )}
           </form>
         </div>
       </div>
