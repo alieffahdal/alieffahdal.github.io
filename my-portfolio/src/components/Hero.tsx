@@ -7,7 +7,10 @@ export default function Hero() {
         <div className="hero-text">
           <h1>
             Welcome to{" "}
-            <span className="gradient-text">Muhammad Alief Fahda Imran Oemar's</span> Office
+            <span className="gradient-text">
+              Muhammad Alief Fahda Imran Oemar's
+            </span>{" "}
+            Office
           </h1>
           <p className="hero-subtitle">
             IT Lecturer | Researcher | Educator | Tech Innovator
