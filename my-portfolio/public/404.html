@@ -9,10 +9,10 @@
     <script>
       // Handle GitHub Pages SPA routing
       var segment = 0;
-      if ((new URL(location)).searchParams.has('p')) {
-        segment = (new URL(location)).searchParams.get('p');
+      if (new URL(location).searchParams.has("p")) {
+        segment = new URL(location).searchParams.get("p");
       }
-      sessionStorage.redirect = segment || '/';
+      sessionStorage.redirect = segment || "/";
       history.replaceState(null, null, location.pathname);
     </script>
   </head>

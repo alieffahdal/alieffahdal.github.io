@@ -1,4 +1,4 @@
-# Alief Fahdal - Portfolio Website
+# Muhammad Alief Fahda Imran Oemar - Portfolio Website
 
 A modern, responsive portfolio website built with React, TypeScript, Vite, and Tailwind CSS.
 
@@ -209,4 +209,4 @@ For questions or issues, reach out through the contact form on the website or vi
 
 ---
 
-**Built with ❤️ by Alief Fahdal**
+**Built with ❤️ by Muhammad Alief Fahda Imran Oemar**

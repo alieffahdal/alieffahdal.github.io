@@ -5,7 +5,7 @@ export default function Research() {
     {
       id: 1,
       title: "Emerging Trends in Cloud-Native Application Development",
-      authors: "Alief Fahdal et al.",
+      authors: "Muhammad Alief Fahda Imran Oemar et al.",
       year: 2024,
       venue: "IEEE Transactions on Software Engineering",
       type: "Journal Article",
@@ -14,7 +14,7 @@ export default function Research() {
     {
       id: 2,
       title: "Student-Centered Learning in Software Engineering Education",
-      authors: "Alief Fahdal, Dr. Sarah Johnson",
+      authors: "Muhammad Alief Fahda Imran Oemar, Dr. Sarah Johnson",
       year: 2023,
       venue: "ACM Conference on Computer Science Education",
       type: "Conference Paper",
@@ -23,7 +23,7 @@ export default function Research() {
     {
       id: 3,
       title: "Microservices Architecture: Design Patterns and Best Practices",
-      authors: "Alief Fahdal",
+      authors: "Muhammad Alief Fahda Imran Oemar",
       year: 2023,
       venue: "International Journal of Computer Science",
       type: "Journal Article",
@@ -32,7 +32,7 @@ export default function Research() {
     {
       id: 4,
       title: "Integrating DevOps in Computer Science Curriculum",
-      authors: "Alief Fahdal, Prof. Michael Chen",
+      authors: "Muhammad Alief Fahda Imran Oemar, Prof. Michael Chen",
       year: 2022,
       venue: "International Conference on Software Engineering Education",
       type: "Conference Paper",

@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="container">
         <div className="footer-content">
           <p>
-            &copy; {currentYear} Prof. Alief Fahdal. All rights reserved. |
+            &copy; {currentYear} Muhammad Alief Fahda Imran Oemar. All rights reserved. |
             Department of Information Technology
           </p>
           <div className="social-links">
