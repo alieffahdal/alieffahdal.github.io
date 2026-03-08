@@ -4,13 +4,15 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "my-portfolio/**"
-      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
 
     steps:
       - name: Checkout code
@@ -35,3 +37,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./my-portfolio/dist
           cname: alieffahdal.github.io
+          force_orphan: true
