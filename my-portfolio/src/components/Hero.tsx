@@ -1,58 +1,64 @@
 import "../styles/Hero.css";
+import HeroScene from "./HeroScene";
+import { profile } from "../data/profile";
 
 export default function Hero() {
   return (
-    <section className="hero">
-      <div className="container hero-content">
-        <div className="hero-text">
-          <h1>
-            Welcome to{" "}
-            <span className="gradient-text">
-              Muhammad Alief Fahda Imran Oemar's
-            </span>{" "}
-            Office
-          </h1>
-          <p className="hero-subtitle">
-            IT Lecturer | Researcher | Educator | Tech Innovator
-          </p>
-          <p className="hero-description">
-            Dedicated to fostering the next generation of IT professionals
-            through engaging education, cutting-edge research, and practical
-            industry experience.
-          </p>
-          <div className="hero-buttons">
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                document
-                  .getElementById("projects")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              View My Work
-            </button>
-            <button
-              className="btn btn-secondary"
-              onClick={() => {
-                document
-                  .getElementById("contact")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              Get In Touch
-            </button>
-          </div>
+    <header className="hero" id="home">
+      <HeroScene />
+      <div className="wrap hero-content">
+        <div className="hero-eyebrow">
+          <span className="eyebrow">
+            {profile.role} &middot; {profile.affiliation}
+          </span>
+          <span className="cursor" aria-hidden="true"></span>
         </div>
-        <div className="hero-image">
-          <div className="floating-card">
-            <div className="card-content">
-              <span className="code-bracket">&lt;</span>
-              <span>Developer</span>
-              <span className="code-bracket">/&gt;</span>
-            </div>
-          </div>
+        <h1 className="statement">
+          Dari ruang kelas ke sistem pemerintahan — merancang solusi digital yang{" "}
+          <em>benar-benar dipakai.</em>
+        </h1>
+        <div className="who-line">
+          <b>
+            {profile.name}, {profile.credentials}
+          </b>{" "}
+          — {profile.currentHighlight}.
+        </div>
+        <p className="bio">{profile.bio}</p>
+        <div className="hero-actions">
+          <a
+            className="btn primary"
+            href="#pengalaman"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("pengalaman")?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            Lihat pengalaman &#8594;
+          </a>
+          <a
+            className="btn"
+            href="https://scholar.google.com/citations?user=-XzpS1MAAAAJ&hl=en"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Google Scholar &#8599;
+          </a>
+          <a
+            className="btn"
+            href="#kontak"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("kontak")?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            Kontak
+          </a>
         </div>
       </div>
-    </section>
+      <div className="scrollcue">
+        <span>scroll</span>
+        <span className="chev"></span>
+      </div>
+    </header>
   );
 }

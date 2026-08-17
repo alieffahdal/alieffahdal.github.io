@@ -1,0 +1,53 @@
+.pub-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 40px;
+  margin-bottom: 48px;
+}
+
+.pub-metrics div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pub-metrics b {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.pub-metrics span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.pub-type {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: 100px;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+.pub-type.research {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.pub-type.service {
+  background: var(--accent-2-soft);
+  color: var(--accent-2);
+}
+
+@media (max-width: 640px) {
+  .pub-metrics {
+    grid-template-columns: repeat(2, auto);
+    gap: 24px 40px;
+  }
+}

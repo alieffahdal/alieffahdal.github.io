@@ -21,14 +21,6 @@ export default function NotFound() {
                 have been moved, renamed, or never existed in the first place.
               </p>
 
-              <div className="error-illustration">
-                <div className="floating-robot">
-                  <div className="robot-head">🤖</div>
-                  <div className="robot-body"></div>
-                  <div className="robot-legs"></div>
-                </div>
-              </div>
-
               <div className="error-actions">
                 <button
                   onClick={() => navigate("/")}
@@ -49,9 +41,9 @@ export default function NotFound() {
                 <div className="quick-links">
                   <a href="/#home">Home</a>
                   <a href="/#about">About</a>
-                  <a href="/#courses">Courses</a>
-                  <a href="/#research">Research</a>
-                  <a href="/#contact">Contact</a>
+                  <a href="/#proyek">Projects</a>
+                  <a href="/#publikasi">Publications</a>
+                  <a href="/#kontak">Contact</a>
                 </div>
               </div>
             </div>
