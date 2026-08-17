@@ -39,7 +39,9 @@ export default function Publications() {
               <div className="yr">{pub.year}</div>
               <div>
                 <div className="title">
-                  {pub.title} <span className={`pub-type ${pub.type === "Penelitian" ? "research" : "service"}`}>{pub.type}</span>
+                  {pub.title}{" "}
+                  <span className={`pub-type ${pub.type === "Penelitian" ? "research" : "service"}`}>{pub.type}</span>
+                  {pub.level && <span className="pub-level">{pub.level}</span>}
                 </div>
                 <div className="venue">{pub.venue}</div>
               </div>

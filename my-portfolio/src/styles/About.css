@@ -40,6 +40,10 @@
   font-size: 17px;
   line-height: 1.75;
   color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.about-bio:last-of-type {
   margin-bottom: 44px;
 }
 

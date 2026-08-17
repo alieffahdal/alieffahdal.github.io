@@ -45,6 +45,19 @@
   color: var(--accent-2);
 }
 
+.pub-level {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: 100px;
+  vertical-align: middle;
+  margin-left: 4px;
+  background: var(--accent-3-soft);
+  color: var(--accent-3);
+}
+
 @media (max-width: 640px) {
   .pub-metrics {
     grid-template-columns: repeat(2, auto);

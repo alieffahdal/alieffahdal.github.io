@@ -29,7 +29,11 @@ export default function About() {
             <img src={portrait} alt={profile.name} />
           </div>
           <div className="about-main">
-            <p className="about-bio">{profile.bio}</p>
+            {profile.bioDetailed.split("\n\n").map((paragraph, i) => (
+              <p className="about-bio" key={i}>
+                {paragraph}
+              </p>
+            ))}
             <div className="stats">
               {stats.map((s) => (
                 <div className="stat" key={s.label}>

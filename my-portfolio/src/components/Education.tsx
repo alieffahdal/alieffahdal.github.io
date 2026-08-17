@@ -2,6 +2,16 @@ import "../styles/Education.css";
 import { education } from "../data/profile";
 import { useZigzagTimeline } from "../hooks/useZigzagTimeline";
 
+function initials(name: string) {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase();
+}
+
 export default function Education() {
   const ref = useZigzagTimeline<HTMLDivElement>();
 
@@ -24,7 +34,16 @@ export default function Education() {
             >
               <div className="zigzag-dot" />
               <div className="zigzag-card edu-card">
-                <div className="edu-degree">{e.degree}</div>
+                <div className="edu-top">
+                  <div className="edu-logo">
+                    {e.logo ? (
+                      <img src={e.logo} alt="" />
+                    ) : (
+                      <span className="edu-logo-fallback">{initials(e.institution)}</span>
+                    )}
+                  </div>
+                  <div className="edu-degree">{e.degree}</div>
+                </div>
                 <div className="edu-field">{e.field}</div>
                 <div className="edu-institution">
                   {e.institution} &middot; {e.location}

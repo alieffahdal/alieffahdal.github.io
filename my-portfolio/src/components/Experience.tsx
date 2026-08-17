@@ -24,7 +24,14 @@ export default function Experience() {
                   <div className="exp-item" key={item.role + item.org}>
                     <div className={`exp-period ${item.current ? "current" : ""}`}>{item.period}</div>
                     <div className="exp-role">{item.role}</div>
-                    <div className="exp-org">{item.org}</div>
+                    <div className="exp-org-row">
+                      {item.logo && (
+                        <span className="exp-logo">
+                          <img src={item.logo} alt="" />
+                        </span>
+                      )}
+                      <div className="exp-org">{item.org}</div>
+                    </div>
                   </div>
                 ))}
               </div>

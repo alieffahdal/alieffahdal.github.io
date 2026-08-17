@@ -1,17 +1,14 @@
-import { useRef, useMemo, useEffect, useState, Suspense } from "react";
+import { useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import portrait from "../assets/alief-portrait.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const AQUA = "#33c2cc";
 const LAVENDER = "#7a57db";
 const CORAL = "#ea4884";
-const PORTRAIT_ASPECT = 452 / 640;
 
 function useReducedMotion() {
   const [reduced, setReduced] = useState(false);
@@ -134,66 +131,6 @@ function Trinket({
   );
 }
 
-function PhotoPlane() {
-  const group = useRef<THREE.Group>(null);
-  const reduced = useReducedMotion();
-  const { pointer } = useThree();
-  const texture = useTexture(portrait);
-
-  const height = 2.6;
-  const width = height * PORTRAIT_ASPECT;
-
-  useEffect(() => {
-    if (reduced || !group.current) return;
-    const ctx = gsap.context(() => {
-      gsap.to(group.current!.position, {
-        x: 5.5,
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#about",
-          start: "top bottom",
-          end: "center center",
-          scrub: 0.6,
-        },
-      });
-      gsap.to(group.current!.scale, {
-        x: 0.01,
-        y: 0.01,
-        z: 0.01,
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#about",
-          start: "top bottom",
-          end: "center center",
-          scrub: 0.6,
-        },
-      });
-    });
-    return () => ctx.revert();
-  }, [reduced]);
-
-  useFrame(() => {
-    if (!group.current || reduced) return;
-    const targetRotY = pointer.x * 0.18;
-    const targetRotX = -pointer.y * 0.12;
-    group.current.rotation.y += (targetRotY - group.current.rotation.y) * 0.05;
-    group.current.rotation.x += (targetRotX - group.current.rotation.x) * 0.05;
-  });
-
-  return (
-    <group ref={group} position={[2.5, -0.1, 0]}>
-      <mesh position={[0, 0, -0.04]}>
-        <planeGeometry args={[width + 0.14, height + 0.14]} />
-        <meshBasicMaterial color={AQUA} transparent opacity={0.8} />
-      </mesh>
-      <mesh>
-        <planeGeometry args={[width, height]} />
-        <meshBasicMaterial map={texture} toneMapped={false} />
-      </mesh>
-    </group>
-  );
-}
-
 function WireframeCore() {
   const group = useRef<THREE.Group>(null);
   const reduced = useReducedMotion();
@@ -275,9 +212,6 @@ export default function PersistentScene() {
         frameloop="always"
       >
         <WireframeCore />
-        <Suspense fallback={null}>
-          <PhotoPlane />
-        </Suspense>
         <Trinket
           position={[2.6, 1.3, 0.6]}
           color={CORAL}
