@@ -1,27 +1,10 @@
 import "../styles/Experience.css";
 import { experience } from "../data/profile";
-import { useScrollReveal } from "../hooks/useScrollReveal";
-
-function ExperienceGroupBlock({ label, items }: (typeof experience)[number]) {
-  const ref = useScrollReveal<HTMLDivElement>({ stagger: 0.08, childSelector: ".timeline-item" });
-
-  return (
-    <div className="timeline-group" ref={ref}>
-      <span className="timeline-label">{label}</span>
-      {items.map((item) => (
-        <div className="timeline-item" key={item.role + item.org}>
-          <div className={`timeline-period ${item.current ? "current" : ""}`}>{item.period}</div>
-          <div>
-            <div className="timeline-role">{item.role}</div>
-            <div className="timeline-org">{item.org}</div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
+import { useZigzagTimeline } from "../hooks/useZigzagTimeline";
 
 export default function Experience() {
+  const ref = useZigzagTimeline<HTMLDivElement>();
+
   return (
     <section id="pengalaman">
       <div className="wrap">
@@ -29,9 +12,23 @@ export default function Experience() {
           <h2>Pengalaman</h2>
           <span className="idx">04 &mdash; akademik, pemerintahan &amp; industri</span>
         </div>
-        <div className="experience-body">
-          {experience.map((group) => (
-            <ExperienceGroupBlock key={group.label} {...group} />
+        <div className="zigzag" ref={ref}>
+          <div className="zigzag-line-track" />
+          <div className="zigzag-line-fill" />
+          {experience.map((group, i) => (
+            <div className={`zigzag-row ${i % 2 === 0 ? "side-left" : "side-right"}`} key={group.label}>
+              <div className="zigzag-dot" />
+              <div className="zigzag-card exp-card">
+                <span className="exp-label">{group.label}</span>
+                {group.items.map((item) => (
+                  <div className="exp-item" key={item.role + item.org}>
+                    <div className={`exp-period ${item.current ? "current" : ""}`}>{item.period}</div>
+                    <div className="exp-role">{item.role}</div>
+                    <div className="exp-org">{item.org}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>

@@ -1,9 +1,9 @@
 import "../styles/Education.css";
 import { education } from "../data/profile";
-import { useScrollReveal } from "../hooks/useScrollReveal";
+import { useZigzagTimeline } from "../hooks/useZigzagTimeline";
 
 export default function Education() {
-  const ref = useScrollReveal<HTMLDivElement>({ stagger: 0.1, childSelector: ".edu-item" });
+  const ref = useZigzagTimeline<HTMLDivElement>();
 
   return (
     <section id="pendidikan">
@@ -12,17 +12,25 @@ export default function Education() {
           <h2>Pendidikan</h2>
           <span className="idx">03 &mdash; riwayat akademik</span>
         </div>
-        <div className="edu-list" ref={ref}>
-          {education.map((e) => (
-            <div className="edu-item" key={e.degree}>
-              <div className="edu-degree">{e.degree}</div>
-              <div className="edu-body">
+        <div className="zigzag" ref={ref}>
+          <div className="zigzag-line-track" />
+          <div className="zigzag-line-fill" />
+          {education.map((e, i) => (
+            <div
+              className={`zigzag-row ${i % 2 === 0 ? "side-left" : "side-right"} ${
+                e.period.includes("sekarang") ? "current" : ""
+              }`}
+              key={e.degree}
+            >
+              <div className="zigzag-dot" />
+              <div className="zigzag-card edu-card">
+                <div className="edu-degree">{e.degree}</div>
                 <div className="edu-field">{e.field}</div>
                 <div className="edu-institution">
                   {e.institution} &middot; {e.location}
                 </div>
+                <div className="edu-period">{e.period}</div>
               </div>
-              <div className="edu-period">{e.period}</div>
             </div>
           ))}
         </div>

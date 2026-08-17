@@ -1,3 +1,40 @@
-.experience-body {
-  max-width: 760px;
+.exp-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.exp-label {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-3);
+}
+
+.exp-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.exp-period {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.exp-period.current {
+  color: var(--accent);
+}
+
+.exp-role {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.exp-org {
+  font-size: 13px;
+  color: var(--text-secondary);
 }

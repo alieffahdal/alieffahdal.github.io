@@ -3,10 +3,18 @@ import { profile, stats, researchFocus } from "../data/profile";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 import portrait from "../assets/alief-portrait.jpg";
 
+const SCATTER: { top: string; left: string; rotate: number }[] = [
+  { top: "6%", left: "6%", rotate: -8 },
+  { top: "12%", left: "64%", rotate: 6 },
+  { top: "40%", left: "2%", rotate: 5 },
+  { top: "42%", left: "80%", rotate: -5 },
+  { top: "74%", left: "16%", rotate: 9 },
+  { top: "76%", left: "58%", rotate: -10 },
+];
+
 export default function About() {
   const bodyRef = useScrollReveal<HTMLDivElement>();
-  const orbitRef = useScrollReveal<HTMLDivElement>();
-  const angleStep = 360 / researchFocus.length;
+  const scatterRef = useScrollReveal<HTMLDivElement>({ stagger: 0.08, childSelector: ".scatter-chip" });
 
   return (
     <section id="about">
@@ -37,37 +45,34 @@ export default function About() {
         </div>
       </div>
 
-      <div className="orbit-section" style={{ marginTop: 80 }}>
+      <div style={{ marginTop: 80 }}>
         <div className="wrap">
           <div className="section-head">
             <h2>Fokus riset</h2>
             <span className="idx">02 &mdash; keahlian</span>
           </div>
         </div>
-        <div className="orbit" ref={orbitRef}>
-          <div className="orbit-ring"></div>
-          <div className="orbit-ring r2"></div>
-          <div className="orbit-center">
-            <span>
+        <div className="wrap">
+          <div className="scatter" ref={scatterRef}>
+            <div className="scatter-label">
               {researchFocus.length} bidang
               <br />
               riset aktif
-            </span>
-          </div>
-          {researchFocus.map((topic, i) => {
-            const angle = angleStep * i;
-            return (
+            </div>
+            {researchFocus.map((topic, i) => (
               <div
-                className="orbit-chip"
+                className="scatter-chip"
                 key={topic}
                 style={{
-                  transform: `rotate(${angle}deg) translate(200px) rotate(${-angle}deg)`,
+                  top: SCATTER[i % SCATTER.length].top,
+                  left: SCATTER[i % SCATTER.length].left,
+                  ["--rotate" as string]: `${SCATTER[i % SCATTER.length].rotate}deg`,
                 }}
               >
                 {topic}
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </div>
     </section>

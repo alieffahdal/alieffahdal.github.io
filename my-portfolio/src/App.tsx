@@ -1,6 +1,8 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import PersistentScene from "./components/PersistentScene";
+import CustomCursor from "./components/CustomCursor";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Education from "./components/Education";
@@ -15,6 +17,8 @@ import NotFound from "./components/NotFound";
 function HomePage() {
   return (
     <div>
+      <PersistentScene />
+      <CustomCursor />
       <Navbar />
       <main>
         <Hero />

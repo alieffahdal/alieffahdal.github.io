@@ -1,11 +1,12 @@
 import "../styles/Hero.css";
-import HeroScene from "./HeroScene";
 import { profile } from "../data/profile";
+import { useSplitReveal } from "../hooks/useSplitReveal";
 
 export default function Hero() {
+  const statementRef = useSplitReveal<HTMLHeadingElement>();
+
   return (
     <header className="hero" id="home">
-      <HeroScene />
       <div className="wrap hero-content">
         <div className="hero-eyebrow">
           <span className="eyebrow">
@@ -13,16 +14,9 @@ export default function Hero() {
           </span>
           <span className="cursor" aria-hidden="true"></span>
         </div>
-        <h1 className="statement">
-          Dari ruang kelas ke sistem pemerintahan — merancang solusi digital yang{" "}
-          <em>benar-benar dipakai.</em>
+        <h1 className="statement" ref={statementRef}>
+          {profile.name}, {profile.credentials}
         </h1>
-        <div className="who-line">
-          <b>
-            {profile.name}, {profile.credentials}
-          </b>{" "}
-          — {profile.currentHighlight}.
-        </div>
         <p className="bio">{profile.bio}</p>
         <div className="hero-actions">
           <a

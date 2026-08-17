@@ -1,18 +1,18 @@
 import "../styles/Projects.css";
 import { projects, type ProjectItem } from "../data/profile";
-import { useTilt } from "../hooks/useTilt";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
-function ProjectCard({ project }: { project: ProjectItem }) {
-  const tiltRef = useTilt<HTMLDivElement>();
+function ProjectRow({ project }: { project: ProjectItem }) {
   const isActive = project.status === "Sedang berjalan";
 
   return (
-    <div className="card" ref={tiltRef}>
-      <span className={`status ${isActive ? "on" : "done"}`}>{project.status}</span>
-      <h3>{project.title}</h3>
-      <p>{project.description}</p>
-      <div className="meta">
+    <div className="project-row">
+      <div className="project-row-main">
+        <span className={`status ${isActive ? "on" : "done"}`}>{project.status}</span>
+        <h3>{project.title}</h3>
+        <p>{project.description}</p>
+      </div>
+      <div className="project-row-meta">
         <span>{project.period}</span>
         <span>{project.partner}</span>
       </div>
@@ -21,7 +21,7 @@ function ProjectCard({ project }: { project: ProjectItem }) {
 }
 
 export default function Projects() {
-  const gridRef = useScrollReveal<HTMLDivElement>({ stagger: 0.12, childSelector: ".card" });
+  const listRef = useScrollReveal<HTMLDivElement>({ stagger: 0.1, childSelector: ".project-row" });
 
   return (
     <section id="proyek">
@@ -30,9 +30,12 @@ export default function Projects() {
           <h2>Proyek &amp; inisiatif</h2>
           <span className="idx">05 &mdash; berjalan &amp; selesai</span>
         </div>
-        <div className="grid" ref={gridRef}>
-          {projects.map((project) => (
-            <ProjectCard project={project} key={project.title} />
+        <div className="project-list" ref={listRef}>
+          {projects.map((project, i) => (
+            <div key={project.title}>
+              <ProjectRow project={project} />
+              {i < projects.length - 1 && <div className="project-divider" />}
+            </div>
           ))}
         </div>
       </div>

@@ -40,7 +40,7 @@ export interface ProjectItem {
 }
 
 export const profile = {
-  name: "Muhammad Alief Fahdal Imran Oemar",
+  name: "Ir. Muhammad Alief Fahdal Imran Oemar",
   credentials: "S.T., M.Sc.",
   role: "Dosen Teknik Informatika",
   affiliation: "Fakultas Teknik, Universitas Hasanuddin",
