@@ -67,20 +67,20 @@ function Figure({ line, node }: { line: string; node: string }) {
     if (head.current) {
       const targetHeadY = pointer.current.x * 0.5;
       const targetHeadX = -pointer.current.y * 0.35;
-      head.current.rotation.y += (targetHeadY - head.current.rotation.y) * 0.08;
-      head.current.rotation.x += (targetHeadX - head.current.rotation.x) * 0.08;
+      head.current.rotation.y += (targetHeadY - head.current.rotation.y) * 0.25;
+      head.current.rotation.x += (targetHeadX - head.current.rotation.x) * 0.25;
     }
     // cursor higher on the page -> arms raised further; cursor lower -> arms rest down.
     // both arms use the same target rotation so they swing the same direction together.
     const targetX = pointer.current.x * 0.6;
     const targetZ = -0.75 - pointer.current.y * 0.75;
     if (rightArm.current) {
-      rightArm.current.rotation.z += (targetZ - rightArm.current.rotation.z) * 0.08;
-      rightArm.current.rotation.x += (targetX - rightArm.current.rotation.x) * 0.08;
+      rightArm.current.rotation.z += (targetZ - rightArm.current.rotation.z) * 0.25;
+      rightArm.current.rotation.x += (targetX - rightArm.current.rotation.x) * 0.25;
     }
     if (leftArm.current) {
-      leftArm.current.rotation.z += (targetZ - leftArm.current.rotation.z) * 0.08;
-      leftArm.current.rotation.x += (targetX - leftArm.current.rotation.x) * 0.08;
+      leftArm.current.rotation.z += (targetZ - leftArm.current.rotation.z) * 0.25;
+      leftArm.current.rotation.x += (targetX - leftArm.current.rotation.x) * 0.25;
     }
   });
 
