@@ -70,16 +70,15 @@ function Figure({ line, node }: { line: string; node: string }) {
       head.current.rotation.y += (targetHeadY - head.current.rotation.y) * 0.08;
       head.current.rotation.x += (targetHeadX - head.current.rotation.x) * 0.08;
     }
-    // cursor higher on the page -> arms raised further; cursor lower -> arms rest down
+    // cursor higher on the page -> arms raised further; cursor lower -> arms rest down.
+    // both arms use the same target rotation so they swing the same direction together.
     const targetX = pointer.current.x * 0.6;
+    const targetZ = -0.75 - pointer.current.y * 0.75;
     if (rightArm.current) {
-      const targetZ = -0.75 - pointer.current.y * 0.75;
       rightArm.current.rotation.z += (targetZ - rightArm.current.rotation.z) * 0.08;
       rightArm.current.rotation.x += (targetX - rightArm.current.rotation.x) * 0.08;
     }
     if (leftArm.current) {
-      // mirrored so the left arm raises the same way on its own side
-      const targetZ = 0.75 + pointer.current.y * 0.75;
       leftArm.current.rotation.z += (targetZ - leftArm.current.rotation.z) * 0.08;
       leftArm.current.rotation.x += (targetX - leftArm.current.rotation.x) * 0.08;
     }
