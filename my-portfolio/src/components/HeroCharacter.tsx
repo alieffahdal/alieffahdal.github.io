@@ -52,7 +52,8 @@ const BASE_Y = -0.68;
 function Figure({ line, node }: { line: string; node: string }) {
   const group = useRef<Group>(null);
   const head = useRef<Group>(null);
-  const waveArm = useRef<Group>(null);
+  const rightArm = useRef<Group>(null);
+  const leftArm = useRef<Group>(null);
   const reduced = useReducedMotion();
   const pointer = usePagePointer();
 
@@ -69,12 +70,18 @@ function Figure({ line, node }: { line: string; node: string }) {
       head.current.rotation.y += (targetHeadY - head.current.rotation.y) * 0.08;
       head.current.rotation.x += (targetHeadX - head.current.rotation.x) * 0.08;
     }
-    if (waveArm.current) {
-      // cursor higher on the page -> arm raised further; cursor lower -> arm rests down
+    // cursor higher on the page -> arms raised further; cursor lower -> arms rest down
+    const targetX = pointer.current.x * 0.6;
+    if (rightArm.current) {
       const targetZ = -0.75 - pointer.current.y * 0.75;
-      const targetX = pointer.current.x * 0.6;
-      waveArm.current.rotation.z += (targetZ - waveArm.current.rotation.z) * 0.08;
-      waveArm.current.rotation.x += (targetX - waveArm.current.rotation.x) * 0.08;
+      rightArm.current.rotation.z += (targetZ - rightArm.current.rotation.z) * 0.08;
+      rightArm.current.rotation.x += (targetX - rightArm.current.rotation.x) * 0.08;
+    }
+    if (leftArm.current) {
+      // mirrored so the left arm raises the same way on its own side
+      const targetZ = 0.75 + pointer.current.y * 0.75;
+      leftArm.current.rotation.z += (targetZ - leftArm.current.rotation.z) * 0.08;
+      leftArm.current.rotation.x += (targetX - leftArm.current.rotation.x) * 0.08;
     }
   });
 
@@ -100,13 +107,13 @@ function Figure({ line, node }: { line: string; node: string }) {
         <capsuleGeometry args={[0.34, 0.7, 4, 10]} />
         {mat}
       </mesh>
-      <group position={[-0.5, 1.15, 0]} rotation={[0, 0, 0.25]}>
+      <group ref={leftArm} position={[-0.5, 1.15, 0]} rotation={[0, 0, 0.25]}>
         <mesh position={[0, -0.35, 0]}>
           <capsuleGeometry args={[0.12, 0.6, 4, 8]} />
           {mat}
         </mesh>
       </group>
-      <group ref={waveArm} position={[0.5, 1.15, 0]}>
+      <group ref={rightArm} position={[0.5, 1.15, 0]}>
         <mesh position={[0, -0.35, 0]}>
           <capsuleGeometry args={[0.12, 0.6, 4, 8]} />
           {mat}
