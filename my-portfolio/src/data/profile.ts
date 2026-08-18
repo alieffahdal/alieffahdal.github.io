@@ -155,6 +155,20 @@ export const researchFocus: ResearchArea[] = [
       en: "Assessment and consulting for Electronic-Based Government Systems (SPBE) for government institutions.",
     },
   },
+  {
+    name: { id: "Pemodelan Stokastik", en: "Stochastic Modeling" },
+    description: {
+      id: "Penerapan model probabilistik untuk analisis ketidakpastian dan prediksi pada sistem yang kompleks.",
+      en: "Applying probabilistic models to analyze uncertainty and prediction in complex systems.",
+    },
+  },
+  {
+    name: { id: "Internet of Things (IoT)", en: "Internet of Things (IoT)" },
+    description: {
+      id: "Perancangan dan integrasi perangkat IoT untuk solusi cerdas di bidang kota pintar dan otomasi.",
+      en: "Designing and integrating IoT devices for smart solutions in smart city and automation applications.",
+    },
+  },
 ];
 
 export const education: EducationItem[] = [
