@@ -1,6 +1,8 @@
 import "../styles/Education.css";
 import { education } from "../data/profile";
 import { useZigzagTimeline } from "../hooks/useZigzagTimeline";
+import { useLanguage, t } from "../i18n/LanguageContext";
+import { ui } from "../i18n/strings";
 
 function initials(name: string) {
   return name
@@ -14,22 +16,21 @@ function initials(name: string) {
 
 export default function Education() {
   const ref = useZigzagTimeline<HTMLDivElement>();
+  const { lang } = useLanguage();
 
   return (
     <section id="pendidikan">
       <div className="wrap">
         <div className="section-head">
-          <h2>Pendidikan</h2>
-          <span className="idx">07 &mdash; riwayat akademik</span>
+          <h2>{t(ui.education.heading, lang)}</h2>
+          <span className="idx">{t(ui.education.eyebrow, lang)}</span>
         </div>
         <div className="zigzag" ref={ref}>
           <div className="zigzag-line-track" />
           <div className="zigzag-line-fill" />
           {education.map((e, i) => (
             <div
-              className={`zigzag-row ${i % 2 === 0 ? "side-left" : "side-right"} ${
-                e.period.includes("sekarang") ? "current" : ""
-              }`}
+              className={`zigzag-row ${i % 2 === 0 ? "side-left" : "side-right"} ${e.current ? "current" : ""}`}
               key={e.degree}
             >
               <div className="zigzag-dot" />
@@ -44,11 +45,11 @@ export default function Education() {
                   </div>
                   <div className="edu-degree">{e.degree}</div>
                 </div>
-                <div className="edu-field">{e.field}</div>
+                <div className="edu-field">{t(e.field, lang)}</div>
                 <div className="edu-institution">
-                  {e.institution} &middot; {e.location}
+                  {e.institution} &middot; {t(e.location, lang)}
                 </div>
-                <div className="edu-period">{e.period}</div>
+                <div className="edu-period">{t(e.period, lang)}</div>
               </div>
             </div>
           ))}

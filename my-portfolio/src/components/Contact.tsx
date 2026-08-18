@@ -2,17 +2,20 @@ import type { CSSProperties } from "react";
 import "../styles/Contact.css";
 import { contactLinks } from "../data/profile";
 import { useScrollReveal } from "../hooks/useScrollReveal";
+import { useLanguage, t } from "../i18n/LanguageContext";
+import { ui } from "../i18n/strings";
 
 const TILTS = [-4, 3, -3, 4, -2, 3, -4];
 
 export default function Contact() {
   const ref = useScrollReveal<HTMLDivElement>({ stagger: 0.06, childSelector: ".chip-link" });
+  const { lang } = useLanguage();
 
   return (
     <section id="kontak">
       <div className="wrap contact-inner">
-        <span className="eyebrow">Kontak</span>
-        <h2 className="contact-heading">Terbuka untuk kolaborasi riset, konsultasi SPBE, dan bimbingan mahasiswa.</h2>
+        <span className="eyebrow">{t(ui.contact.eyebrow, lang)}</span>
+        <h2 className="contact-heading">{t(ui.contact.heading, lang)}</h2>
         <div className="chip-links" ref={ref}>
           {contactLinks.map((link, i) => (
             <a

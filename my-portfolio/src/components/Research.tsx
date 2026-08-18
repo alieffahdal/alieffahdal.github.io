@@ -2,6 +2,8 @@ import "../styles/Research.css";
 import { researchFocus } from "../data/profile";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 import { useTilt } from "../hooks/useTilt";
+import { useLanguage, t } from "../i18n/LanguageContext";
+import { ui } from "../i18n/strings";
 
 function ResearchCard({ name, description, index }: { name: string; description: string; index: number }) {
   const tiltRef = useTilt<HTMLDivElement>();
@@ -17,17 +19,23 @@ function ResearchCard({ name, description, index }: { name: string; description:
 
 export default function Research() {
   const gridRef = useScrollReveal<HTMLDivElement>({ stagger: 0.08, childSelector: ".tag-card" });
+  const { lang } = useLanguage();
 
   return (
     <section id="riset">
       <div className="wrap">
         <div className="section-head">
-          <h2>Riset &amp; Bidang Keahlian</h2>
-          <span className="idx">02 &mdash; keahlian</span>
+          <h2>{t(ui.research.heading, lang)}</h2>
+          <span className="idx">{t(ui.research.eyebrow, lang)}</span>
         </div>
         <div className="tag-grid" ref={gridRef}>
           {researchFocus.map((area, i) => (
-            <ResearchCard key={area.name} name={area.name} description={area.description} index={i} />
+            <ResearchCard
+              key={area.name.id}
+              name={t(area.name, lang)}
+              description={t(area.description, lang)}
+              index={i}
+            />
           ))}
         </div>
       </div>

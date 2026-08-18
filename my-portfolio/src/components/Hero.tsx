@@ -2,6 +2,8 @@ import "../styles/Hero.css";
 import { profile } from "../data/profile";
 import { useSplitReveal } from "../hooks/useSplitReveal";
 import { useMagnetic } from "../hooks/useMagnetic";
+import { useLanguage, t } from "../i18n/LanguageContext";
+import { ui } from "../i18n/strings";
 import Blobs from "./Blobs";
 import HeroCharacter from "./HeroCharacter";
 
@@ -29,6 +31,7 @@ function MagneticLink({
 
 export default function Hero() {
   const statementRef = useSplitReveal<HTMLHeadingElement>();
+  const { lang } = useLanguage();
 
   return (
     <header className="hero" id="home">
@@ -37,14 +40,14 @@ export default function Hero() {
         <div className="hero-text">
           <div className="hero-eyebrow">
             <span className="eyebrow">
-              {profile.role} &middot; {profile.affiliation}
+              {t(profile.role, lang)} &middot; {t(profile.affiliation, lang)}
             </span>
             <span className="cursor" aria-hidden="true"></span>
           </div>
           <h1 className="statement" ref={statementRef}>
             {profile.name}, {profile.credentials}
           </h1>
-          <p className="bio">{profile.bio}</p>
+          <p className="bio">{t(profile.bio, lang)}</p>
           <div className="hero-actions">
             <MagneticLink
               className="btn primary"
@@ -54,13 +57,13 @@ export default function Hero() {
                 document.getElementById("pengalaman")?.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              Lihat pengalaman &#8594;
+              {t(ui.hero.viewExperience, lang)} &#8594;
             </MagneticLink>
             <MagneticLink
               className="btn"
               href="https://scholar.google.com/citations?user=-XzpS1MAAAAJ&hl=en"
             >
-              Google Scholar &#8599;
+              {t(ui.hero.scholar, lang)} &#8599;
             </MagneticLink>
             <MagneticLink
               className="btn"
@@ -70,7 +73,7 @@ export default function Hero() {
                 document.getElementById("kontak")?.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              Kontak
+              {t(ui.hero.contact, lang)}
             </MagneticLink>
           </div>
         </div>
@@ -79,7 +82,7 @@ export default function Hero() {
         </div>
       </div>
       <div className="scrollcue">
-        <span>scroll</span>
+        <span>{t(ui.hero.scroll, lang)}</span>
         <span className="chev"></span>
       </div>
     </header>

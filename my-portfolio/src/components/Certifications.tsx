@@ -1,6 +1,8 @@
 import "../styles/Certifications.css";
 import { certifications } from "../data/profile";
 import { useScrollReveal } from "../hooks/useScrollReveal";
+import { useLanguage, t } from "../i18n/LanguageContext";
+import { ui } from "../i18n/strings";
 
 function initials(name: string) {
   return name
@@ -14,13 +16,14 @@ function initials(name: string) {
 
 export default function Certifications() {
   const ref = useScrollReveal<HTMLDivElement>({ stagger: 0.08, childSelector: ".cert-badge" });
+  const { lang } = useLanguage();
 
   return (
     <section id="sertifikasi">
       <div className="wrap">
         <div className="section-head">
-          <h2>Sertifikasi</h2>
-          <span className="idx">08 &mdash; profesional</span>
+          <h2>{t(ui.certifications.heading, lang)}</h2>
+          <span className="idx">{t(ui.certifications.eyebrow, lang)}</span>
         </div>
         <div className="cert-grid" ref={ref}>
           {certifications.map((cert) => (

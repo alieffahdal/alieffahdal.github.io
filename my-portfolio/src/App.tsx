@@ -1,5 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { LanguageProvider } from "./i18n/LanguageContext";
 import Navbar from "./components/Navbar";
 import PersistentScene from "./components/PersistentScene";
 import CustomCursor from "./components/CustomCursor";
@@ -41,12 +42,14 @@ function HomePage() {
 
 function App() {
   return (
-    <div className="app">
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+    <LanguageProvider>
+      <div className="app">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
+    </LanguageProvider>
   );
 }
 

@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/NotFound.css";
+import { useLanguage, t } from "../i18n/LanguageContext";
+import { ui } from "../i18n/strings";
 
 export default function NotFound() {
   const navigate = useNavigate();
+  const { lang } = useLanguage();
 
   return (
     <div className="app">
@@ -11,39 +14,30 @@ export default function NotFound() {
           <div className="not-found-content">
             <div className="error-code">
               <span className="code-line">404</span>
-              <span className="code-desc">Page Not Found</span>
+              <span className="code-desc">{t(ui.notFound.codeDesc, lang)}</span>
             </div>
 
             <div className="error-message">
-              <h1>Oops! Page not found</h1>
-              <p>
-                The page you're looking for seems to have wandered off. It might
-                have been moved, renamed, or never existed in the first place.
-              </p>
+              <h1>{t(ui.notFound.title, lang)}</h1>
+              <p>{t(ui.notFound.description, lang)}</p>
 
               <div className="error-actions">
-                <button
-                  onClick={() => navigate("/")}
-                  className="btn btn-primary"
-                >
-                  Back to Home
+                <button onClick={() => navigate("/")} className="btn btn-primary">
+                  {t(ui.notFound.backHome, lang)}
                 </button>
-                <button
-                  onClick={() => window.history.back()}
-                  className="btn btn-secondary"
-                >
-                  Go Back
+                <button onClick={() => window.history.back()} className="btn btn-secondary">
+                  {t(ui.notFound.goBack, lang)}
                 </button>
               </div>
 
               <div className="menu-links">
-                <p>Or navigate to:</p>
+                <p>{t(ui.notFound.orNavigate, lang)}</p>
                 <div className="quick-links">
-                  <a href="/#home">Home</a>
-                  <a href="/#about">About</a>
-                  <a href="/#proyek">Projects</a>
-                  <a href="/#publikasi">Publications</a>
-                  <a href="/#kontak">Contact</a>
+                  <a href="/#home">{t(ui.notFound.linkHome, lang)}</a>
+                  <a href="/#about">{t(ui.notFound.linkAbout, lang)}</a>
+                  <a href="/#proyek">{t(ui.notFound.linkProjects, lang)}</a>
+                  <a href="/#publikasi">{t(ui.notFound.linkPublications, lang)}</a>
+                  <a href="/#kontak">{t(ui.notFound.linkContact, lang)}</a>
                 </div>
               </div>
             </div>

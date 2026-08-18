@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import "../styles/Navbar.css";
 import portrait from "../assets/alief-portrait.jpg";
+import { useLanguage, t } from "../i18n/LanguageContext";
+import { ui } from "../i18n/strings";
 
 const LINKS = [
-  { id: "about", label: "Tentang" },
-  { id: "riset", label: "Riset" },
-  { id: "publikasi", label: "Publikasi" },
-  { id: "pengalaman", label: "Pengalaman" },
-  { id: "proyek", label: "Proyek" },
-  { id: "pendidikan", label: "Pendidikan" },
-  { id: "kontak", label: "Kontak" },
+  { id: "about", label: ui.nav.about },
+  { id: "riset", label: ui.nav.riset },
+  { id: "publikasi", label: ui.nav.publikasi },
+  { id: "pengalaman", label: ui.nav.pengalaman },
+  { id: "proyek", label: ui.nav.proyek },
+  { id: "pendidikan", label: ui.nav.pendidikan },
+  { id: "kontak", label: ui.nav.kontak },
 ];
 
 type Theme = "light" | "dark";
@@ -28,6 +30,7 @@ function applyTheme(theme: Theme | null) {
 }
 
 export default function Navbar() {
+  const { lang, toggleLang } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [solid, setSolid] = useState(false);
   const [theme, setTheme] = useState<Theme | null>(null);
@@ -78,7 +81,7 @@ export default function Navbar() {
         <button
           className="mobile-toggle"
           onClick={() => setIsOpen(!isOpen)}
-          aria-label="Buka menu navigasi"
+          aria-label={t(ui.nav.openMenuAria, lang)}
         >
           <span></span>
           <span></span>
@@ -90,15 +93,18 @@ export default function Navbar() {
             {LINKS.map((link) => (
               <li key={link.id}>
                 <button onClick={() => scrollToSection(link.id)} className="nav-link">
-                  {link.label}
+                  {t(link.label, lang)}
                 </button>
               </li>
             ))}
           </ul>
+          <button className="lang-toggle" onClick={toggleLang} aria-label={t(ui.lang.switchToEn, lang)}>
+            {lang === "id" ? "EN" : "ID"}
+          </button>
           <button
             className="theme-toggle"
             onClick={toggleTheme}
-            aria-label={effectiveTheme === "dark" ? "Aktifkan mode terang" : "Aktifkan mode gelap"}
+            aria-label={effectiveTheme === "dark" ? t(ui.theme.enableLight, lang) : t(ui.theme.enableDark, lang)}
           >
             <span className="theme-toggle-dot" aria-hidden="true" />
           </button>
