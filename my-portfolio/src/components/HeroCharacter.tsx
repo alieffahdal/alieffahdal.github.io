@@ -37,7 +37,6 @@ function usePagePointer() {
 }
 
 const JOINTS: [number, number, number][] = [
-  [0, 1.55, 0],
   [0, 0.75, 0],
   [-0.5, 0.85, 0],
   [0.5, 0.85, 0],
@@ -52,6 +51,7 @@ const BASE_Y = -0.68;
 
 function Figure({ line, node }: { line: string; node: string }) {
   const group = useRef<Group>(null);
+  const head = useRef<Group>(null);
   const waveArm = useRef<Group>(null);
   const reduced = useReducedMotion();
   const pointer = usePagePointer();
@@ -63,8 +63,15 @@ function Figure({ line, node }: { line: string; node: string }) {
       group.current.position.y = BASE_Y + Math.sin(t * 1.2) * 0.06;
       group.current.rotation.y = Math.sin(t * 0.4) * 0.18;
     }
+    if (head.current) {
+      const targetHeadY = pointer.current.x * 0.5;
+      const targetHeadX = -pointer.current.y * 0.35;
+      head.current.rotation.y += (targetHeadY - head.current.rotation.y) * 0.08;
+      head.current.rotation.x += (targetHeadX - head.current.rotation.x) * 0.08;
+    }
     if (waveArm.current) {
-      const targetZ = -0.75 + pointer.current.y * 0.75;
+      // cursor higher on the page -> arm raised further; cursor lower -> arm rests down
+      const targetZ = -0.75 - pointer.current.y * 0.75;
       const targetX = pointer.current.x * 0.6;
       waveArm.current.rotation.z += (targetZ - waveArm.current.rotation.z) * 0.08;
       waveArm.current.rotation.x += (targetX - waveArm.current.rotation.x) * 0.08;
@@ -75,10 +82,20 @@ function Figure({ line, node }: { line: string; node: string }) {
 
   return (
     <group ref={group} position={[0, BASE_Y, 0]}>
-      <mesh position={[0, 1.55, 0]}>
-        <sphereGeometry args={[0.42, 14, 12]} />
-        {mat}
-      </mesh>
+      <group ref={head} position={[0, 1.55, 0]}>
+        <mesh>
+          <sphereGeometry args={[0.42, 14, 12]} />
+          {mat}
+        </mesh>
+        <mesh position={[-0.15, 0.05, 0.36]}>
+          <sphereGeometry args={[0.05, 8, 8]} />
+          <meshBasicMaterial color={node} />
+        </mesh>
+        <mesh position={[0.15, 0.05, 0.36]}>
+          <sphereGeometry args={[0.05, 8, 8]} />
+          <meshBasicMaterial color={node} />
+        </mesh>
+      </group>
       <mesh position={[0, 0.75, 0]}>
         <capsuleGeometry args={[0.34, 0.7, 4, 10]} />
         {mat}
