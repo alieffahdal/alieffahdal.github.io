@@ -44,6 +44,10 @@ export interface Publication {
   level?: string;
 }
 
+export interface Course {
+  name: string;
+}
+
 export interface Certification {
   name: string;
   issuer: string;
@@ -79,13 +83,50 @@ export const stats = [
   { value: 6, suffix: "", label: "Sertifikasi profesional" },
 ];
 
-export const researchFocus = [
-  "Software Engineering",
-  "Web Engineering",
-  "Machine Learning",
-  "Data Science",
-  "Sistem Informasi",
-  "Transformasi Digital (SPBE)",
+export const teaching: Course[] = [
+  { name: "Dasar Pemrograman Komputer" },
+  { name: "Pemrograman Web" },
+  { name: "Pemrograman Mobile" },
+  { name: "Jaringan Komputer" },
+  { name: "Animasi dan Pemodelan 3D" },
+  { name: "Manajemen Pengelolaan Teknologi Informasi" },
+  { name: "Rekayasa Web" },
+  { name: "Rekayasa Perangkat Lunak" },
+  { name: "Proyek Rekayasa Perangkat Lunak" },
+  { name: "Topik Khusus Rekayasa Perangkat Lunak" },
+  { name: "Pemrograman Visual" },
+];
+
+export interface ResearchArea {
+  name: string;
+  description: string;
+}
+
+export const researchFocus: ResearchArea[] = [
+  {
+    name: "Software Engineering",
+    description: "Praktik rekayasa perangkat lunak untuk sistem backend dan solusi web, dari kampus hingga pemerintahan.",
+  },
+  {
+    name: "Web Engineering",
+    description: "Arsitektur dan pengembangan aplikasi web menggunakan Java dan JavaScript.",
+  },
+  {
+    name: "Machine Learning",
+    description: "Penerapan deep learning untuk masalah nyata, termasuk prediksi gempa bumi berbasis LSTM.",
+  },
+  {
+    name: "Data Science",
+    description: "Analitik data untuk mendukung pengambilan keputusan di sektor pendidikan dan pemerintahan.",
+  },
+  {
+    name: "Sistem Informasi",
+    description: "Perancangan sistem informasi untuk UMKM dan tata kelola data instansi.",
+  },
+  {
+    name: "Transformasi Digital (SPBE)",
+    description: "Asesmen dan konsultasi Sistem Pemerintahan Berbasis Elektronik untuk instansi pemerintah.",
+  },
 ];
 
 export const education: EducationItem[] = [

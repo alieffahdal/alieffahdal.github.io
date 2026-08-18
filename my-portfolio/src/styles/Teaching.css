@@ -1,0 +1,29 @@
+.teaching-institution {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+.course-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.course-chip {
+  font-size: 14px;
+  padding: 10px 18px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border-strong);
+  color: var(--text);
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+@media (hover: hover) {
+  .course-chip:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    transform: translateY(-2px);
+  }
+}

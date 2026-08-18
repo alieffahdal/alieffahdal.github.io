@@ -37,12 +37,18 @@
 
 .pub-type.research {
   background: var(--accent-soft);
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .pub-type.service {
   background: var(--accent-2-soft);
   color: var(--accent-2);
+}
+
+.pub-empty {
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 20px 0;
 }
 
 .pub-level {

@@ -3,12 +3,17 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffectiveTheme } from "../hooks/useEffectiveTheme";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const AQUA = "#33c2cc";
-const LAVENDER = "#7a57db";
-const CORAL = "#ea4884";
+/* Colors are picked per theme so the wireframe stays legible on both a
+   white and a near-black background; the lime accent is the one constant
+   pop, matching the site's monochrome-plus-one-accent palette. */
+const PALETTE = {
+  light: { wire: "#3a3a3a", node: "#8fb300", trinket: "#d3ff3f", trinketDark: "#1a1a1a" },
+  dark: { wire: "#b0b0b0", node: "#d3ff3f", trinket: "#d3ff3f", trinketDark: "#e5e5e5" },
+};
 
 function useReducedMotion() {
   const [reduced, setReduced] = useState(false);
@@ -22,14 +27,12 @@ function useReducedMotion() {
   return reduced;
 }
 
-function ParticleField() {
+function ParticleField({ color }: { color: string }) {
   const ref = useRef<THREE.Points>(null);
   const reduced = useReducedMotion();
-  const { positions, colors } = useMemo(() => {
-    const count = 460;
+  const positions = useMemo(() => {
+    const count = 380;
     const pos = new Float32Array(count * 3);
-    const col = new Float32Array(count * 3);
-    const palette = [new THREE.Color(AQUA), new THREE.Color(LAVENDER), new THREE.Color(CORAL)];
     for (let i = 0; i < count; i++) {
       const r = 5 + Math.random() * 5.5;
       const theta = Math.random() * Math.PI * 2;
@@ -37,12 +40,8 @@ function ParticleField() {
       pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
       pos[i * 3 + 2] = r * Math.cos(phi);
-      const c = palette[i % palette.length];
-      col[i * 3] = c.r;
-      col[i * 3 + 1] = c.g;
-      col[i * 3 + 2] = c.b;
     }
-    return { positions: pos, colors: col };
+    return pos;
   }, []);
 
   useFrame(() => {
@@ -53,9 +52,8 @@ function ParticleField() {
     <points ref={ref}>
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-        <bufferAttribute attach="attributes-color" args={[colors, 3]} />
       </bufferGeometry>
-      <pointsMaterial vertexColors size={0.035} transparent opacity={0.5} />
+      <pointsMaterial color={color} size={0.03} transparent opacity={0.35} />
     </points>
   );
 }
@@ -63,7 +61,7 @@ function ParticleField() {
 function Trinket({
   position,
   color,
-  scale = 0.42,
+  scale = 0.36,
   shape = "octahedron",
   speed = 1,
   crossOnScroll,
@@ -87,11 +85,7 @@ function Trinket({
   );
 
   useEffect(() => {
-    if (!crossOnScroll || !mesh.current) return;
-    if (reduced) {
-      mesh.current.position.x = crossOnScroll.toX;
-      return;
-    }
+    if (!crossOnScroll || !mesh.current || reduced) return;
     const ctx = gsap.context(() => {
       gsap.fromTo(
         mesh.current!.position,
@@ -122,16 +116,12 @@ function Trinket({
 
   return (
     <mesh ref={mesh} position={position} geometry={geo}>
-      <meshBasicMaterial color={color} />
-      <lineSegments>
-        <edgesGeometry args={[geo]} />
-        <lineBasicMaterial color="#050311" transparent opacity={0.4} />
-      </lineSegments>
+      <meshBasicMaterial color={color} wireframe />
     </mesh>
   );
 }
 
-function WireframeCore() {
+function WireframeCore({ wireColor, nodeColor }: { wireColor: string; nodeColor: string }) {
   const group = useRef<THREE.Group>(null);
   const reduced = useReducedMotion();
   const { pointer } = useThree();
@@ -140,6 +130,7 @@ function WireframeCore() {
   useEffect(() => {
     if (reduced || !group.current) return;
     const ctx = gsap.context(() => {
+      // hero -> about: drift left, shrink
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: "#about",
@@ -154,6 +145,7 @@ function WireframeCore() {
         0,
       );
 
+      // proyek section: sweep across to the right
       gsap.fromTo(
         group.current!.position,
         { x: -1.6 },
@@ -175,11 +167,11 @@ function WireframeCore() {
   useFrame((state) => {
     if (reduced) return;
     if (group.current) {
-      group.current.rotation.y += 0.0018;
-      group.current.rotation.x += 0.0006;
+      group.current.rotation.y += 0.0016;
+      group.current.rotation.x += 0.0005;
     }
-    state.camera.position.x += (pointer.x * 1.4 - state.camera.position.x) * 0.03;
-    state.camera.position.y += (pointer.y * 1.0 - state.camera.position.y) * 0.03;
+    state.camera.position.x += (pointer.x * 1.2 - state.camera.position.x) * 0.03;
+    state.camera.position.y += (pointer.y * 0.8 - state.camera.position.y) * 0.03;
     state.camera.lookAt(0, 0, 0);
   });
 
@@ -187,48 +179,55 @@ function WireframeCore() {
     <group ref={group}>
       <lineSegments>
         <wireframeGeometry args={[geo]} />
-        <lineBasicMaterial color={AQUA} transparent opacity={0.55} />
+        <lineBasicMaterial color={wireColor} transparent opacity={0.45} />
       </lineSegments>
       <points geometry={geo}>
-        <pointsMaterial color={LAVENDER} size={0.06} transparent opacity={0.95} />
+        <pointsMaterial color={nodeColor} size={0.055} transparent opacity={0.9} />
       </points>
     </group>
   );
 }
 
+function Scene({ colors }: { colors: (typeof PALETTE)["light"] }) {
+  return (
+    <>
+      <WireframeCore wireColor={colors.wire} nodeColor={colors.node} />
+      <Trinket
+        position={[2.6, 1.2, 0.6]}
+        color={colors.trinket}
+        scale={0.38}
+        shape="octahedron"
+        speed={1}
+        crossOnScroll={{ trigger: "#proyek", fromX: 2.6, toX: -2.6 }}
+      />
+      <Trinket
+        position={[-2.7, -1, 0.3]}
+        color={colors.trinketDark}
+        scale={0.28}
+        shape="tetrahedron"
+        speed={1.3}
+        crossOnScroll={{ trigger: "#proyek", fromX: -2.7, toX: 2.7 }}
+      />
+      <ParticleField color={colors.node} />
+    </>
+  );
+}
+
 export default function PersistentScene() {
-  const wrapRef = useRef<HTMLDivElement>(null);
+  const theme = useEffectiveTheme();
+  const colors = PALETTE[theme];
 
   return (
-    <div
-      ref={wrapRef}
-      style={{ position: "fixed", inset: 0, zIndex: -1, pointerEvents: "none" }}
-      aria-hidden="true"
-    >
+    <div style={{ position: "fixed", inset: 0, zIndex: -1, pointerEvents: "none" }} aria-hidden="true">
+      {/* key forces a clean remount (and fresh materials) on theme change */}
       <Canvas
+        key={theme}
         camera={{ position: [0, 0, 7], fov: 48 }}
-        gl={{ alpha: true, antialias: true, preserveDrawingBuffer: true }}
+        gl={{ alpha: true, antialias: true }}
         dpr={[1, 2]}
         frameloop="always"
       >
-        <WireframeCore />
-        <Trinket
-          position={[2.6, 1.3, 0.6]}
-          color={CORAL}
-          scale={0.42}
-          shape="octahedron"
-          speed={1}
-          crossOnScroll={{ trigger: "#proyek", fromX: 2.6, toX: -2.6 }}
-        />
-        <Trinket
-          position={[-2.7, -1, 0.3]}
-          color={LAVENDER}
-          scale={0.3}
-          shape="tetrahedron"
-          speed={1.3}
-          crossOnScroll={{ trigger: "#proyek", fromX: -2.7, toX: 2.7 }}
-        />
-        <ParticleField />
+        <Scene colors={colors} />
       </Canvas>
     </div>
   );

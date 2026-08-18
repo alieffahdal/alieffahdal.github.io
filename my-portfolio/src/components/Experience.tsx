@@ -9,8 +9,8 @@ export default function Experience() {
     <section id="pengalaman">
       <div className="wrap">
         <div className="section-head">
-          <h2>Pengalaman</h2>
-          <span className="idx">04 &mdash; akademik, pemerintahan &amp; industri</span>
+          <h2>Pengalaman Profesional</h2>
+          <span className="idx">05 &mdash; akademik, pemerintahan &amp; industri</span>
         </div>
         <div className="zigzag" ref={ref}>
           <div className="zigzag-line-track" />

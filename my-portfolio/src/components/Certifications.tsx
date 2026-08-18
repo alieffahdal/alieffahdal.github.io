@@ -20,7 +20,7 @@ export default function Certifications() {
       <div className="wrap">
         <div className="section-head">
           <h2>Sertifikasi</h2>
-          <span className="idx">07 &mdash; profesional</span>
+          <span className="idx">08 &mdash; profesional</span>
         </div>
         <div className="cert-grid" ref={ref}>
           {certifications.map((cert) => (

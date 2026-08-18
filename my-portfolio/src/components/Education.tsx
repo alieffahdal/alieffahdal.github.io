@@ -20,7 +20,7 @@ export default function Education() {
       <div className="wrap">
         <div className="section-head">
           <h2>Pendidikan</h2>
-          <span className="idx">03 &mdash; riwayat akademik</span>
+          <span className="idx">07 &mdash; riwayat akademik</span>
         </div>
         <div className="zigzag" ref={ref}>
           <div className="zigzag-line-track" />

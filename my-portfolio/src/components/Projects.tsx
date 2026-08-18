@@ -28,7 +28,7 @@ export default function Projects() {
       <div className="wrap">
         <div className="section-head">
           <h2>Proyek &amp; inisiatif</h2>
-          <span className="idx">05 &mdash; berjalan &amp; selesai</span>
+          <span className="idx">06 &mdash; berjalan &amp; selesai</span>
         </div>
         <div className="project-list" ref={listRef}>
           {projects.map((project, i) => (

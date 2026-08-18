@@ -5,10 +5,12 @@ import PersistentScene from "./components/PersistentScene";
 import CustomCursor from "./components/CustomCursor";
 import Hero from "./components/Hero";
 import About from "./components/About";
-import Education from "./components/Education";
+import Research from "./components/Research";
+import Publications from "./components/Publications";
+import Teaching from "./components/Teaching";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
-import Publications from "./components/Publications";
+import Education from "./components/Education";
 import Certifications from "./components/Certifications";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -23,10 +25,12 @@ function HomePage() {
       <main>
         <Hero />
         <About />
-        <Education />
+        <Research />
+        <Publications />
+        <Teaching />
         <Experience />
         <Projects />
-        <Publications />
+        <Education />
         <Certifications />
         <Contact />
       </main>
