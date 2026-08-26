@@ -33,11 +33,11 @@ export default function NotFound() {
               <div className="menu-links">
                 <p>{t(ui.notFound.orNavigate, lang)}</p>
                 <div className="quick-links">
-                  <a href="/#home">{t(ui.notFound.linkHome, lang)}</a>
-                  <a href="/#about">{t(ui.notFound.linkAbout, lang)}</a>
-                  <a href="/#proyek">{t(ui.notFound.linkProjects, lang)}</a>
-                  <a href="/#publikasi">{t(ui.notFound.linkPublications, lang)}</a>
-                  <a href="/#kontak">{t(ui.notFound.linkContact, lang)}</a>
+                  <a href={`${import.meta.env.BASE_URL}#home`}>{t(ui.notFound.linkHome, lang)}</a>
+                  <a href={`${import.meta.env.BASE_URL}#about`}>{t(ui.notFound.linkAbout, lang)}</a>
+                  <a href={`${import.meta.env.BASE_URL}#proyek`}>{t(ui.notFound.linkProjects, lang)}</a>
+                  <a href={`${import.meta.env.BASE_URL}#publikasi`}>{t(ui.notFound.linkPublications, lang)}</a>
+                  <a href={`${import.meta.env.BASE_URL}#kontak`}>{t(ui.notFound.linkContact, lang)}</a>
                 </div>
               </div>
             </div>

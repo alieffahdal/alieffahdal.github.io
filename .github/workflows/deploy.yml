@@ -36,10 +36,17 @@ jobs:
         working-directory: ./my-portfolio
         run: npm run build
 
+      - name: Assemble Pages site
+        run: |
+          mkdir -p site/Education
+          cp -r my-portfolio/dist/. site/Education/
+          cp site-root/index.html site/index.html
+          cp site-root/index.html site/404.html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./my-portfolio/dist"
+          path: "./site"
 
   deploy:
     environment:
