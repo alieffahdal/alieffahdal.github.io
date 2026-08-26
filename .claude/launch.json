@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--prefix", "my-portfolio"],
       "port": 5173
+    },
+    {
+      "name": "just-leps-photos",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "just-leps-photos"],
+      "port": 5174
     }
   ]
 }

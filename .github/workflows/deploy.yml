@@ -26,22 +26,31 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "lts/*"
 
-      - name: Install dependencies
+      - name: Install Education dependencies
         working-directory: ./my-portfolio
         run: npm install
 
-      - name: Build
+      - name: Build Education
         working-directory: ./my-portfolio
+        run: npm run build
+
+      - name: Install JustLepsPhotos dependencies
+        working-directory: ./just-leps-photos
+        run: npm install
+
+      - name: Build JustLepsPhotos
+        working-directory: ./just-leps-photos
         run: npm run build
 
       - name: Assemble Pages site
         run: |
-          mkdir -p site/Education
+          mkdir -p site/Education site/JustLepsPhotos
           cp -r my-portfolio/dist/. site/Education/
+          cp -r just-leps-photos/dist/. site/JustLepsPhotos/
           cp site-root/index.html site/index.html
-          cp site-root/index.html site/404.html
+          cp site-root/404.html site/404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
