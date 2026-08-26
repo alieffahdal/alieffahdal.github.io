@@ -1,11 +1,23 @@
+import readingRoom from "../assets/photos/01-reading-room.jpg";
+import burningCar from "../assets/photos/02-burning-car.jpg";
+import sbyRoom from "../assets/photos/03-sby-room.jpg";
+import prambananSilhouette from "../assets/photos/04-prambanan-silhouette.jpg";
+import prambananGoldenHour from "../assets/photos/05-prambanan-golden-hour.jpg";
+import templeRelief from "../assets/photos/06-temple-relief.jpg";
+import reachingTheSky from "../assets/photos/07-reaching-the-sky.jpg";
+import cityAndMountain from "../assets/photos/08-city-and-mountain.jpg";
+import tamanSari from "../assets/photos/09-taman-sari.jpg";
+import undergroundPassage from "../assets/photos/10-underground-passage.jpg";
+import campusWalkway from "../assets/photos/11-campus-walkway.jpg";
+import ministryBuilding from "../assets/photos/12-ministry-building.jpg";
+
 export type Category = "portrait" | "landscape" | "street" | "travel";
 
 export interface Photo {
   id: number;
   title: string;
   category: Category;
-  gradient: string;
-  tall?: boolean;
+  src: string;
 }
 
 export const categories: { value: Category | "all"; label: string }[] = [
@@ -17,16 +29,16 @@ export const categories: { value: Category | "all"; label: string }[] = [
 ];
 
 export const photos: Photo[] = [
-  { id: 1, title: "Golden Hour Portrait", category: "portrait", gradient: "linear-gradient(135deg, #f6ad55, #c53030)", tall: true },
-  { id: 2, title: "Mountain Ridge", category: "landscape", gradient: "linear-gradient(135deg, #4facfe, #00f2fe)" },
-  { id: 3, title: "City Crossing", category: "street", gradient: "linear-gradient(135deg, #434343, #000000)" },
-  { id: 4, title: "Coastal Village", category: "travel", gradient: "linear-gradient(135deg, #43cea2, #185a9d)", tall: true },
-  { id: 5, title: "Quiet Gaze", category: "portrait", gradient: "linear-gradient(135deg, #ee9ca7, #ffdde1)" },
-  { id: 6, title: "Rice Terraces", category: "landscape", gradient: "linear-gradient(135deg, #56ab2f, #a8e063)" },
-  { id: 7, title: "Rainy Alley", category: "street", gradient: "linear-gradient(135deg, #2c3e50, #4ca1af)", tall: true },
-  { id: 8, title: "Market Morning", category: "travel", gradient: "linear-gradient(135deg, #f7971e, #ffd200)" },
-  { id: 9, title: "Studio Light", category: "portrait", gradient: "linear-gradient(135deg, #7f00ff, #e100ff)" },
-  { id: 10, title: "Sunset Cliffs", category: "landscape", gradient: "linear-gradient(135deg, #ff5f6d, #ffc371)", tall: true },
-  { id: 11, title: "Neon Corner", category: "street", gradient: "linear-gradient(135deg, #0f2027, #203a43, #2c5364)" },
-  { id: 12, title: "Island Ferry", category: "travel", gradient: "linear-gradient(135deg, #2193b0, #6dd5ed)" },
+  { id: 1, title: "Reading Room", category: "travel", src: readingRoom },
+  { id: 2, title: "Burning Car", category: "street", src: burningCar },
+  { id: 3, title: "SBY's Room", category: "travel", src: sbyRoom },
+  { id: 4, title: "Prambanan Silhouette", category: "travel", src: prambananSilhouette },
+  { id: 5, title: "Prambanan at Golden Hour", category: "travel", src: prambananGoldenHour },
+  { id: 6, title: "Temple Relief", category: "travel", src: templeRelief },
+  { id: 7, title: "Reaching the Sky", category: "travel", src: reachingTheSky },
+  { id: 8, title: "City and the Mountain", category: "landscape", src: cityAndMountain },
+  { id: 9, title: "Taman Sari", category: "travel", src: tamanSari },
+  { id: 10, title: "Underground Passage", category: "travel", src: undergroundPassage },
+  { id: 11, title: "Campus Walkway", category: "landscape", src: campusWalkway },
+  { id: 12, title: "Ministry Building", category: "street", src: ministryBuilding },
 ];

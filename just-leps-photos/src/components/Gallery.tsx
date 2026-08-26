@@ -30,8 +30,7 @@ export default function Gallery() {
         <p className="section-kicker">Gallery</p>
         <h2>Selected Work</h2>
         <p className="section-note">
-          Placeholder shots below &mdash; swap them for your own photos in{" "}
-          <code>src/data/photos.ts</code>.
+          A few frames from <a href="https://www.instagram.com/just.leps/">@just.leps</a>.
         </p>
       </div>
 
@@ -47,22 +46,26 @@ export default function Gallery() {
         ))}
       </div>
 
-      <div className="gallery-grid">
-        {filtered.map((photo) => (
-          <button
-            key={photo.id}
-            className={`photo-card${photo.tall ? " tall" : ""}`}
-            style={{ background: photo.gradient }}
-            onClick={() => setOpenId(photo.id)}
-            aria-label={`Open ${photo.title}`}
-          >
-            <span className="photo-card-overlay">
-              <span className="photo-card-title">{photo.title}</span>
-              <span className="photo-card-category">{photo.category}</span>
-            </span>
-          </button>
-        ))}
-      </div>
+      {filtered.length === 0 ? (
+        <p className="gallery-empty">No photos in this category yet.</p>
+      ) : (
+        <div className="gallery-grid">
+          {filtered.map((photo) => (
+            <button
+              key={photo.id}
+              className="photo-card"
+              onClick={() => setOpenId(photo.id)}
+              aria-label={`Open ${photo.title}`}
+            >
+              <img src={photo.src} alt={photo.title} loading="lazy" />
+              <span className="photo-card-overlay">
+                <span className="photo-card-title">{photo.title}</span>
+                <span className="photo-card-category">{photo.category}</span>
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
 
       {openPhoto && (
         <div className="lightbox" onClick={() => setOpenId(null)}>
@@ -93,11 +96,8 @@ export default function Gallery() {
               ›
             </button>
           )}
-          <div
-            className="lightbox-image"
-            style={{ background: openPhoto.gradient }}
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="lightbox-image" onClick={(e) => e.stopPropagation()}>
+            <img src={openPhoto.src} alt={openPhoto.title} />
             <div className="lightbox-caption">
               <span className="photo-card-title">{openPhoto.title}</span>
               <span className="photo-card-category">{openPhoto.category}</span>
