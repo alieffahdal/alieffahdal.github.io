@@ -1,65 +1,42 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { categories, photos, type Category } from "../data/photos";
+import type { Photo } from "../data/photos";
 
-export default function Gallery() {
-  const [active, setActive] = useState<Category | "all">("all");
+interface GalleryProps {
+  photos: Photo[];
+  emptyLabel?: string;
+}
+
+export default function Gallery({ photos, emptyLabel = "No photos here yet." }: GalleryProps) {
   const [openId, setOpenId] = useState<number | null>(null);
 
-  const filtered = photos.filter((p) => active === "all" || p.category === active);
-  const openIndex = filtered.findIndex((p) => p.id === openId);
-  const openPhoto = openIndex >= 0 ? filtered[openIndex] : null;
+  const openIndex = photos.findIndex((p) => p.id === openId);
+  const openPhoto = openIndex >= 0 ? photos[openIndex] : null;
 
   useEffect(() => {
     if (openId === null) return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpenId(null);
-      if (e.key === "ArrowRight" && openIndex < filtered.length - 1) {
-        setOpenId(filtered[openIndex + 1].id);
+      if (e.key === "ArrowRight" && openIndex < photos.length - 1) {
+        setOpenId(photos[openIndex + 1].id);
       }
       if (e.key === "ArrowLeft" && openIndex > 0) {
-        setOpenId(filtered[openIndex - 1].id);
+        setOpenId(photos[openIndex - 1].id);
       }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [openId, openIndex, filtered]);
+  }, [openId, openIndex, photos]);
 
   return (
-    <section id="gallery" className="gallery">
-      <motion.div
-        className="section-heading"
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <p className="section-kicker">Gallery</p>
-        <h2>Selected Work</h2>
-        <p className="section-note">
-          A few frames from <a href="https://www.instagram.com/just.leps/">@just.leps</a>.
-        </p>
-      </motion.div>
-
-      <div className="gallery-filters">
-        {categories.map((c) => (
-          <button
-            key={c.value}
-            className={`filter-btn${active === c.value ? " active" : ""}`}
-            onClick={() => setActive(c.value)}
-          >
-            {c.label}
-          </button>
-        ))}
-      </div>
-
-      {filtered.length === 0 ? (
-        <p className="gallery-empty">No photos in this category yet.</p>
+    <>
+      {photos.length === 0 ? (
+        <p className="gallery-empty">{emptyLabel}</p>
       ) : (
         <motion.div className="gallery-grid" layout>
           <AnimatePresence mode="popLayout">
-            {filtered.map((photo) => (
+            {photos.map((photo) => (
               <motion.button
                 key={photo.id}
                 layout
@@ -76,7 +53,7 @@ export default function Gallery() {
                 <img src={photo.src} alt={photo.title} loading="lazy" />
                 <span className="photo-card-overlay">
                   <span className="photo-card-title">{photo.title}</span>
-                  <span className="photo-card-category">{photo.category}</span>
+                  <span className="photo-card-category">{photo.location.place}</span>
                 </span>
               </motion.button>
             ))}
@@ -100,19 +77,19 @@ export default function Gallery() {
                   aria-label="Previous"
                   onClick={(e) => {
                     e.stopPropagation();
-                    setOpenId(filtered[openIndex - 1].id);
+                    setOpenId(photos[openIndex - 1].id);
                   }}
                 >
                   ‹
                 </button>
               )}
-              {openIndex < filtered.length - 1 && (
+              {openIndex < photos.length - 1 && (
                 <button
                   className="lightbox-nav lightbox-next"
                   aria-label="Next"
                   onClick={(e) => {
                     e.stopPropagation();
-                    setOpenId(filtered[openIndex + 1].id);
+                    setOpenId(photos[openIndex + 1].id);
                   }}
                 >
                   ›
@@ -129,7 +106,7 @@ export default function Gallery() {
                 <img src={openPhoto.src} alt={openPhoto.title} />
                 <div className="lightbox-caption">
                   <span className="photo-card-title">{openPhoto.title}</span>
-                  <span className="photo-card-category">{openPhoto.category}</span>
+                  <span className="photo-card-category">{openPhoto.location.place}</span>
                 </div>
               </motion.div>
             </>
@@ -137,6 +114,6 @@ export default function Gallery() {
         </div>,
         document.body,
       )}
-    </section>
+    </>
   );
 }
