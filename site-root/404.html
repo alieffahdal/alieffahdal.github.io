@@ -2,6 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      // GitHub Pages only serves one 404.html (this one, at the site root),
+      // so a deep link inside a sub-app (e.g. /JustLepsPhotos/discover)
+      // lands here instead of that app's own client-side router. If the
+      // path belongs to a known app, hand it back to that app's index.html
+      // and let it restore the real path before its router mounts.
+      (function () {
+        var path = location.pathname + location.search + location.hash;
+        var apps = ["/Education/", "/JustLepsPhotos/"];
+        for (var i = 0; i < apps.length; i++) {
+          if (path.indexOf(apps[i]) === 0) {
+            sessionStorage.setItem("spa-redirect", path);
+            location.replace(apps[i]);
+            return;
+          }
+        }
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Page not found</title>
     <style>
