@@ -1,5 +1,6 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import { LanguageProvider } from "./i18n/LanguageContext";
 import Navbar from "./components/Navbar";
 import PersistentScene from "./components/PersistentScene";
@@ -41,13 +42,41 @@ function HomePage() {
 }
 
 function App() {
+  const location = useLocation();
+
   return (
     <LanguageProvider>
       <div className="app">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route
+              path="/"
+              element={
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <HomePage />
+                </motion.div>
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <NotFound />
+                </motion.div>
+              }
+            />
+          </Routes>
+        </AnimatePresence>
       </div>
     </LanguageProvider>
   );
