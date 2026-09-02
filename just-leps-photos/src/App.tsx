@@ -1,35 +1,30 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Gallery from "./components/Gallery";
-import About from "./components/About";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import Travel from "./pages/Travel";
+import LocationDetail from "./pages/LocationDetail";
+import Discover from "./pages/Discover";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import About from "./pages/About";
+import Screensaver from "./pages/Screensaver";
 import NotFound from "./components/NotFound";
-
-function HomePage() {
-  return (
-    <div>
-      <Navbar />
-      <main>
-        <Hero />
-        <Gallery />
-        <About />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
-  );
-}
 
 function App() {
   return (
-    <div className="app">
-      <Routes>
-        <Route path="/" element={<HomePage />} />
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/travel" element={<Travel />} />
+        <Route path="/travel/:slug" element={<LocationDetail />} />
+        <Route path="/discover" element={<Discover />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+      </Route>
+      <Route path="/screensaver" element={<Screensaver />} />
+    </Routes>
   );
 }
 

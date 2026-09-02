@@ -6,8 +6,8 @@ export default function NotFound() {
       <span className="not-found-code">404</span>
       <h1>Page not found</h1>
       <p>The photo or page you're looking for doesn't exist.</p>
-      <Link to="/" className="hero-cta">
-        Back to gallery
+      <Link to="/" className="pill-link pill-link-solid">
+        Back home
       </Link>
     </section>
   );
