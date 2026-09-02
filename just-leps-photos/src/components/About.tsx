@@ -1,9 +1,24 @@
+import { motion } from "framer-motion";
+
 export default function About() {
   return (
     <section id="about" className="about">
       <div className="about-grid">
-        <div className="about-portrait" aria-hidden="true" />
-        <div className="about-text">
+        <motion.div
+          className="about-portrait"
+          aria-hidden="true"
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        />
+        <motion.div
+          className="about-text"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        >
           <p className="section-kicker">About</p>
           <h2>Hi, I'm Leps.</h2>
           <p>
@@ -27,7 +42,7 @@ export default function About() {
               <span className="about-stat-label">Cities</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
