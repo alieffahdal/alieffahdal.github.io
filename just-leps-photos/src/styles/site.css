@@ -280,6 +280,14 @@ main {
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.lightbox-visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .lightbox-image {
