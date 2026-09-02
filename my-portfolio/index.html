@@ -2,6 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      // Restore the real path saved by the site-root 404.html redirect
+      // (see /site-root/404.html) before React Router mounts.
+      (function () {
+        var redirect = sessionStorage.getItem("spa-redirect");
+        if (redirect) {
+          sessionStorage.removeItem("spa-redirect");
+          history.replaceState(null, "", redirect);
+        }
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
