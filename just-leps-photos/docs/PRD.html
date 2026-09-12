@@ -480,7 +480,7 @@
     <h1>JustLepsPhotos</h1>
     <p class="sub">Situs portofolio fotografer JustLeps &mdash; dokumen kebutuhan produk untuk pengembangan lanjutan dari MVP yang sudah live.</p>
     <dl class="stamp">
-      <div><dt>Status</dt><dd>Draft &mdash; v0.1</dd></div>
+      <div><dt>Status</dt><dd>v0.2 &mdash; Keputusan dikonfirmasi</dd></div>
       <div><dt>Tanggal</dt><dd>12 Sep 2026</dd></div>
       <div><dt>Pemilik</dt><dd>M. Alief Fahda Imran Oemar (JustLeps)</dd></div>
       <div><dt>Situs Berjalan</dt><dd>alieffahdal.github.io/JustLepsPhotos</dd></div>
@@ -500,7 +500,7 @@
       <li><a href="#s7"><span class="n mono">07</span>Data Model</a></li>
       <li><a href="#s8"><span class="n mono">08</span>Edge Cases</a></li>
       <li><a href="#s9"><span class="n mono">09</span>Success Metrics</a></li>
-      <li><a href="#s10"><span class="n mono">10</span>Open Questions</a></li>
+      <li><a href="#s10"><span class="n mono">10</span>Keputusan Produk</a></li>
     </ol>
   </nav>
 
@@ -517,7 +517,7 @@
 
     <section id="s2">
       <div class="sec-head"><span class="num mono">02</span><h2>Target User</h2></div>
-      <p>Situs ini untuk satu fotografer (JustLeps) dan single-tenant &mdash; bukan produk yang dipakai fotografer lain. Dua kelompok pengunjung di bawah adalah <b>inferensi dari struktur situs yang sudah dibangun</b> (kontak yang jelas, blog cerita perjalanan, pengelompokan seri/lokasi) dan belum dikonfirmasi langsung oleh pemilik produk &mdash; lihat <a href="#s10">Open Questions</a>.</p>
+      <p>Situs ini untuk satu fotografer (JustLeps) dan single-tenant &mdash; bukan produk yang dipakai fotografer lain. Pemilik produk mengonfirmasi target audiens adalah <b>kombinasi</b> dari dua kelompok pengunjung di bawah (§10 Q02) &mdash; bukan cuma satu segmen tunggal.</p>
       <div class="personas">
         <div class="persona">
           <div class="role mono">Persona 1</div>
@@ -551,7 +551,7 @@
             <li>Satu tautan yang merepresentasikan karya JustLeps secara utuh &amp; terkurasi lintas genre.</li>
             <li>Menambah/mengedit foto dan caption tanpa menyentuh kode komponen React.</li>
             <li>Metadata SEO &amp; social-preview yang benar di tiap halaman.</li>
-            <li>Struktur &ldquo;Series&rdquo; kurasi tematik yang sebenarnya &mdash; bukan location placeholder yang dipakai sekarang.</li>
+            <li>Struktur &ldquo;Series&rdquo; kurasi tematik sebagai <i>pelengkap</i> Travel/lokasi yang sudah ada &mdash; keduanya dipertahankan berdampingan (§10 Q05).</li>
             <li>Jalur kontak yang jelas dan konsisten di seluruh situs.</li>
             <li>Visibilitas dasar soal traffic &amp; minat (analytics statis, privacy-friendly).</li>
           </ul>
@@ -607,7 +607,6 @@
             <li>Discover map dengan filter genre, data lokasi sungguhan</li>
             <li>Multi-bahasa ID/EN (menyusul pola i18n situs Education)</li>
             <li>Newsletter sign-up (embed statis pihak ketiga)</li>
-            <li>Link-out cetak/jual foto <span class="note">&mdash; jika niat komersial dikonfirmasi</span></li>
             <li>Optimasi gambar otomatis (responsive/AVIF)</li>
           </ul>
         </div>
@@ -617,7 +616,7 @@
             <li>Git-based CMS (mis. Decap CMS) &mdash; butuh OAuth proxy kecil, sedikit melenceng dari &ldquo;tanpa backend&rdquo;</li>
             <li>Galeri privat per klien (butuh auth sungguhan)</li>
             <li>Form booking dengan validasi server-side</li>
-            <li>E-commerce cetak foto penuh</li>
+            <li>E-commerce cetak foto penuh <span class="note">&mdash; di luar cakupan, situs dikonfirmasi non-komersial (§10 Q01)</span></li>
           </ul>
         </div>
       </div>
@@ -654,6 +653,7 @@
           <li>Series punya: slug, name, description, cover photo, daftar foto anggota &mdash; relasi many-to-many dengan Photo (satu foto boleh masuk lebih dari satu seri).</li>
           <li>Halaman index Series: daftar semua seri dengan cover, nama, jumlah foto.</li>
           <li>Halaman detail Series: pakai ulang pola galeri+lightbox yang sudah ada.</li>
+          <li>Series melengkapi &mdash; bukan menggantikan &mdash; struktur Travel/lokasi yang sudah ada. Kedua struktur navigasi dipertahankan berdampingan: lokasi = geografis, series = kurasi tematik (keputusan produk, §10 Q05).</li>
         </ul>
       </div>
 
@@ -661,9 +661,9 @@
         <div class="tag">FR-6.4</div>
         <h4>Kontak</h4>
         <ul>
-          <li>Section/halaman Kontak menampilkan minimal satu metode kontak yang bisa langsung diklik (<code class="mono">mailto:</code> atau <code class="mono">wa.me</code>) &mdash; bukan cuma tautan Instagram.</li>
+          <li>Satu-satunya metode kontak adalah email (<code class="mono">mailto:alieffahdal@gmail.com</code>) &mdash; tidak perlu WhatsApp atau form pihak ketiga (keputusan produk, §10 Q04).</li>
           <li>Semua CTA &ldquo;Contact me&rdquo; di situs mengarah konsisten ke halaman/section kontak yang sama.</li>
-          <li>Tidak ada form submit ke server sendiri (selaras batasan statis). Kalau butuh form, wajib pakai layanan pihak ketiga &mdash; keputusan providernya ditandai sebagai open question (§10) karena berimplikasi pada privasi data pengunjung.</li>
+          <li>Tidak ada form submit ke server sendiri maupun ke layanan pihak ketiga (selaras batasan statis dan keputusan produk untuk tidak melibatkan pihak ketiga).</li>
         </ul>
       </div>
 
@@ -671,9 +671,9 @@
         <div class="tag">FR-6.5</div>
         <h4>Analytics statis</h4>
         <ul>
-          <li>Satu snippet analytics privacy-friendly (kandidat: Plausible, GoatCounter, atau Cloudflare Web Analytics) dipasang lewat layout bersama &mdash; bukan disalin manual per halaman.</li>
-          <li>Tidak menyimpan data pribadi pengunjung; provider yang dipilih harus cookieless supaya tidak perlu cookie-consent banner.</li>
-          <li>Pemilihan provider spesifik ditandai sebagai open question (§10).</li>
+          <li>Provider yang dipilih: <b>Cloudflare Web Analytics</b> (keputusan produk, §10 Q03) &mdash; gratis, cookieless, tinggal tempel satu snippet script tanpa perlu memindahkan DNS/hosting.</li>
+          <li>Snippet dipasang lewat layout bersama &mdash; bukan disalin manual per halaman.</li>
+          <li>Tidak menyimpan data pribadi pengunjung; cookieless sehingga tidak perlu cookie-consent banner.</li>
         </ul>
       </div>
     </section>
@@ -725,7 +725,7 @@
             <tbody>
               <tr><td>slug, place, country</td><td>string</td><td class="desc">Metadata geografis</td></tr>
               <tr><td>lat, lng</td><td>number</td><td class="desc">Untuk pin peta Discover</td></tr>
-              <tr><td>photos</td><td>derived</td><td class="desc">Turunan dari Photo.location &mdash; bukan lagi struktur navigasi utama</td></tr>
+              <tr><td>photos</td><td>derived</td><td class="desc">Turunan dari Photo.location &mdash; tetap dipertahankan sebagai struktur navigasi utama (Travel), berdampingan dengan Series (keputusan produk, §10 Q05)</td></tr>
             </tbody>
           </table>
         </div>
@@ -753,7 +753,7 @@
             <caption>ContactMethod &amp; SiteMeta (konfigurasi, bukan data pengguna)</caption>
             <thead><tr><th>Entitas</th><th>Field</th><th>Keterangan</th></tr></thead>
             <tbody>
-              <tr><td>ContactMethod</td><td>type, value/href, isPrimary</td><td class="desc">email / whatsapp / instagram</td></tr>
+              <tr><td>ContactMethod</td><td>type, value/href, isPrimary</td><td class="desc">Hanya email (<code class="mono">mailto:alieffahdal@gmail.com</code>) &mdash; keputusan produk, tidak perlu whatsapp/form pihak ketiga</td></tr>
               <tr><td>SiteMeta</td><td>route, title, description, ogImage</td><td class="desc">Satu entri per rute untuk FR-6.2</td></tr>
             </tbody>
           </table>
@@ -809,19 +809,41 @@
         <div class="m-how mono">Cek manual / Lighthouse</div>
         <div class="m-note">Pass/fail per halaman utama, bukan skor numerik ambisius.</div>
       </div>
-      <p class="metric-warn">Tanpa backend/analytics server, metrik funnel komersial (booking closed, penjualan cetak, dsb.) <b>tidak bisa diukur</b> di MVP ini. Kalau itu jadi tujuan, produk perlu re-scope &mdash; lihat Q01.</p>
+      <p class="metric-warn">Situs sudah dikonfirmasi non-komersial (§10 Q01), sehingga metrik funnel komersial (booking closed, penjualan cetak, dsb.) sengaja <b>di luar cakupan</b> MVP ini &mdash; bukan keterbatasan teknis yang perlu di-re-scope.</p>
     </section>
 
     <section id="s10">
-      <div class="sec-head"><span class="num mono">10</span><h2>Open Questions</h2></div>
+      <div class="sec-head"><span class="num mono">10</span><h2>Keputusan Produk</h2></div>
+      <p class="note">Sebelumnya berupa 7 Open Questions &mdash; sudah dijawab langsung oleh pemilik produk (JustLeps) pada 12 Sep 2026. Nomor Q01&ndash;Q07 dipertahankan sebagai referensi silang dari bagian lain dokumen ini.</p>
       <ul class="questions">
-        <li>Apakah situs punya niat komersial (terima booking/jasa foto, jual cetak) atau murni portofolio kreatif/personal? Menentukan relevansi fitur booking, halaman layanan/harga, dan link jual-beli di v2.</li>
-        <li>Siapa target audiens sebenarnya menurut JustLeps &mdash; calon klien, sesama fotografer, followers Instagram, atau kombinasi? Dua persona di §2 adalah inferensi dari struktur situs, belum dikonfirmasi.</li>
-        <li>Provider analytics statis mana yang dipilih (Plausible / GoatCounter / Cloudflare / lainnya)? Ada implikasi biaya &amp; kepemilikan data.</li>
-        <li>Kalau butuh form kontak sungguhan (bukan cuma mailto/wa.me), layanan pihak ketiga mana yang boleh dipakai? Perlu persetujuan eksplisit karena data submission lewat pihak ketiga.</li>
-        <li>Apakah &ldquo;Series&rdquo; menggantikan sepenuhnya struktur Travel/lokasi yang sudah ada, atau keduanya dipertahankan berdampingan (lokasi = geografis, series = kurasi tematik)?</li>
-        <li>Berapa target volume foto realistis dalam 6&ndash;12 bulan ke depan? Memengaruhi apakah content model JSON manual cukup, atau perlu tooling tambahan (mis. CLI bantu entri).</li>
-        <li>Apakah 12 foto yang sudah ada di situs saat ini tetap dipakai sebagai draft, atau akan diganti sebagian besar dengan foto kurasi baru sebelum MVP ini dianggap &ldquo;selesai&rdquo;?</li>
+        <li>
+          <p>Apakah situs punya niat komersial (terima booking/jasa foto, jual cetak) atau murni portofolio kreatif/personal?</p>
+          <p class="note"><b>Keputusan:</b> Tidak untuk komersial. Situs ini murni untuk menyimpan &amp; memamerkan hasil foto JustLeps &mdash; bukan untuk menerima booking atau menjual cetak.</p>
+        </li>
+        <li>
+          <p>Siapa target audiens sebenarnya menurut JustLeps &mdash; calon klien, sesama fotografer, followers Instagram, atau kombinasi?</p>
+          <p class="note"><b>Keputusan:</b> Kombinasi &mdash; kedua persona di §2 (calon klien dan sesama fotografer/pengikut) tetap relevan sekaligus, bukan cuma satu segmen.</p>
+        </li>
+        <li>
+          <p>Provider analytics statis mana yang dipilih (Plausible / GoatCounter / Cloudflare / lainnya)?</p>
+          <p class="note"><b>Keputusan:</b> Pemilik produk meminta rekomendasi tim &mdash; dipilih <b>Cloudflare Web Analytics</b>: gratis, cookieless (tidak perlu consent banner), dan tinggal tempel satu snippet script tanpa perlu memindahkan DNS/hosting. Paling cocok untuk situs statis personal tanpa budget analytics.</p>
+        </li>
+        <li>
+          <p>Kalau butuh form kontak sungguhan (bukan cuma mailto/wa.me), layanan pihak ketiga mana yang boleh dipakai?</p>
+          <p class="note"><b>Keputusan:</b> Tidak perlu layanan pihak ketiga. Metode kontak cukup email langsung ke <code class="mono">alieffahdal@gmail.com</code> (<code class="mono">mailto:</code>) &mdash; tidak ada WhatsApp maupun form pihak ketiga di MVP ini.</p>
+        </li>
+        <li>
+          <p>Apakah &ldquo;Series&rdquo; menggantikan sepenuhnya struktur Travel/lokasi yang sudah ada, atau keduanya dipertahankan berdampingan?</p>
+          <p class="note"><b>Keputusan:</b> Keduanya dipertahankan berdampingan &mdash; lokasi (geografis, struktur Travel yang sudah ada) dan Series (kurasi tematik baru) berjalan sebagai dua struktur navigasi yang saling melengkapi, bukan saling menggantikan.</p>
+        </li>
+        <li>
+          <p>Berapa target volume foto realistis dalam 6&ndash;12 bulan ke depan?</p>
+          <p class="note"><b>Keputusan:</b> Sekitar 10 foto baru. Volume ini kecil &mdash; content model JSON manual (FR-6.1) cukup, tidak perlu tooling CLI tambahan untuk entri data di MVP ini.</p>
+        </li>
+        <li>
+          <p>Apakah 12 foto yang sudah ada di situs saat ini tetap dipakai sebagai draft, atau akan diganti sebagian besar dengan foto kurasi baru sebelum MVP ini dianggap &ldquo;selesai&rdquo;?</p>
+          <p class="note"><b>Keputusan:</b> Akan diganti. 12 foto yang ada sekarang adalah placeholder sementara dan akan digantikan oleh foto kurasi baru sebelum MVP ini dianggap selesai.</p>
+        </li>
       </ul>
     </section>
 
