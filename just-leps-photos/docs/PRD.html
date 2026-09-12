@@ -1,0 +1,831 @@
+<title>JustLepsPhotos PRD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground: #f2f2f0;
+    --surface: #ffffff;
+    --surface-2: #ebebe7;
+    --ink: #17181a;
+    --ink-dim: #61646a;
+    --ink-faint: #93969b;
+    --line: #dcdcd8;
+    --accent: #b8302c;
+    --accent-ink: #ffffff;
+    --accent-wash: #b8302c14;
+    --v2: #4a6b6e;
+    --v2-wash: #4a6b6e14;
+    --later: #7a7460;
+    --later-wash: #7a746014;
+    --shadow: 0 1px 2px rgba(20,20,15,0.05);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #121214;
+      --surface: #19191c;
+      --surface-2: #202024;
+      --ink: #eef0ee;
+      --ink-dim: #a2a5aa;
+      --ink-faint: #6c6f74;
+      --line: #2c2c30;
+      --accent: #e2564f;
+      --accent-ink: #1c0a09;
+      --accent-wash: #e2564f1f;
+      --v2: #7fa5a8;
+      --v2-wash: #7fa5a81f;
+      --later: #a39c82;
+      --later-wash: #a39c821f;
+      --shadow: 0 1px 2px rgba(0,0,0,0.35);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #121214;
+    --surface: #19191c;
+    --surface-2: #202024;
+    --ink: #eef0ee;
+    --ink-dim: #a2a5aa;
+    --ink-faint: #6c6f74;
+    --line: #2c2c30;
+    --accent: #e2564f;
+    --accent-ink: #1c0a09;
+    --accent-wash: #e2564f1f;
+    --v2: #7fa5a8;
+    --v2-wash: #7fa5a81f;
+    --later: #a39c82;
+    --later-wash: #a39c821f;
+    --shadow: 0 1px 2px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .mono {
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  a { color: var(--accent); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .shell {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px 96px;
+    display: grid;
+    grid-template-columns: 220px minmax(0, 760px);
+    gap: 64px;
+    justify-content: center;
+  }
+
+  @media (max-width: 900px) {
+    .shell { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 0 20px 64px; }
+    .toc { display: none; }
+  }
+
+  /* ---- Header ---- */
+  .titleblock {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 56px 24px 40px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .titleblock-inner { max-width: 760px; margin: 0 auto 0 244px; }
+
+  @media (max-width: 900px) {
+    .titleblock-inner { margin: 0 auto; }
+  }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .titleblock h1 {
+    font-size: clamp(32px, 5vw, 46px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin-top: 10px;
+  }
+
+  .titleblock .sub {
+    color: var(--ink-dim);
+    font-size: 18px;
+    margin-top: 10px;
+    max-width: 58ch;
+  }
+
+  .stamp {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 24px 36px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+  }
+
+  @media (max-width: 640px) {
+    .stamp { grid-template-columns: repeat(2, auto); }
+  }
+
+  .stamp dt {
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 11px;
+    margin: 0;
+  }
+
+  .stamp dd { margin: 3px 0 0; color: var(--ink); }
+
+  /* ---- TOC ---- */
+  .toc {
+    position: sticky;
+    top: 40px;
+    align-self: start;
+    padding-top: 48px;
+  }
+
+  .toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .toc a {
+    display: flex;
+    gap: 10px;
+    padding: 7px 10px;
+    margin-left: -10px;
+    border-radius: 6px;
+    color: var(--ink-dim);
+    text-decoration: none;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+  }
+
+  .toc a:hover { color: var(--ink); background: var(--surface-2); }
+  .toc a span.n { color: var(--ink-faint); }
+
+  /* ---- Sections ---- */
+  main { padding-top: 48px; min-width: 0; }
+
+  section { margin-bottom: 68px; scroll-margin-top: 24px; }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .sec-head .num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 15px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .sec-head h2 {
+    font-size: 25px;
+    font-weight: 700;
+  }
+
+  section > p { margin: 0 0 14px; max-width: 66ch; }
+  section > p:last-child { margin-bottom: 0; }
+
+  .lede {
+    font-size: 19px;
+    color: var(--ink);
+  }
+
+  .note {
+    font-size: 14.5px;
+    color: var(--ink-dim);
+    font-style: italic;
+  }
+
+  /* ---- Personas ---- */
+  .personas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 640px) { .personas { grid-template-columns: 1fr; } }
+
+  .persona {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px 22px 24px;
+    box-shadow: var(--shadow);
+  }
+
+  .persona .role {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+  }
+
+  .persona h3 {
+    font-size: 19px;
+    margin-top: 6px;
+    font-weight: 700;
+  }
+
+  .persona .quote {
+    font-style: italic;
+    color: var(--ink-dim);
+    margin-top: 10px;
+    font-size: 15px;
+  }
+
+  .persona ul {
+    margin: 14px 0 0;
+    padding-left: 18px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12.5px;
+    color: var(--ink-dim);
+    line-height: 1.75;
+  }
+
+  /* ---- Goals ---- */
+  .goalgrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 18px;
+  }
+
+  @media (max-width: 640px) { .goalgrid { grid-template-columns: 1fr; } }
+
+  .goalgrid h4 {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 10px;
+    color: var(--ink-faint);
+  }
+
+  .goalgrid ul { margin: 0; padding-left: 20px; }
+  .goalgrid li { margin-bottom: 8px; }
+
+  /* ---- User stories ---- */
+  .stories { list-style: none; margin: 0; padding: 0; }
+
+  .stories li {
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+  }
+  .stories li:last-child { border-bottom: 1px solid var(--line); }
+
+  .stories b { color: var(--accent); font-weight: 600; }
+
+  /* ---- Feature tiers ---- */
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 760px) { .tiers { grid-template-columns: 1fr; } }
+
+  .tier h4 {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 5px 10px;
+    border-radius: 999px;
+    margin: 0 0 14px;
+  }
+
+  .tier.mvp h4 { background: var(--accent); color: var(--accent-ink); }
+  .tier.v2 h4 { background: var(--v2-wash); color: var(--v2); border: 1px solid var(--v2); }
+  .tier.later h4 { background: transparent; color: var(--later); border: 1px dashed var(--later); }
+
+  .tier ul { margin: 0; padding-left: 18px; font-size: 15px; }
+  .tier li { margin-bottom: 9px; }
+
+  /* ---- FR blocks ---- */
+  .fr {
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 20px;
+    margin-bottom: 28px;
+  }
+
+  .fr .tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .fr h4 { font-size: 17px; margin: 4px 0 10px; font-weight: 700; }
+  .fr ul { margin: 0; padding-left: 18px; }
+  .fr li { margin-bottom: 6px; }
+  .fr li::marker { color: var(--ink-faint); }
+
+  /* ---- Tables ---- */
+  .tablewrap { overflow-x: auto; margin-top: 8px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    min-width: 480px;
+  }
+
+  caption {
+    text-align: left;
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+
+  th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    font-weight: 600;
+    padding: 8px 14px 8px 0;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  td {
+    padding: 10px 14px 10px 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    color: var(--ink);
+  }
+
+  td.desc, td.prose {
+    font-family: "Source Serif 4", serif;
+    font-size: 14.5px;
+    color: var(--ink-dim);
+  }
+
+  .entity-block { margin-bottom: 32px; }
+  .entity-block:last-child { margin-bottom: 0; }
+
+  /* ---- Metrics ---- */
+  .metric-row {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 1.3fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .metric-row:last-child { border-bottom: 1px solid var(--line); }
+
+  @media (max-width: 700px) {
+    .metric-row { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  .metric-row .m-name { font-weight: 600; font-family: "Archivo", sans-serif; font-size: 15px; }
+  .metric-row .m-how { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--ink-dim); }
+  .metric-row .m-note { font-size: 14px; color: var(--ink-dim); }
+
+  .metric-warn {
+    margin-top: 18px;
+    padding: 14px 16px;
+    background: var(--accent-wash);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    font-size: 14.5px;
+    color: var(--ink);
+  }
+
+  /* ---- Open questions ---- */
+  .questions { list-style: none; margin: 0; padding: 0; counter-reset: q; }
+
+  .questions li {
+    counter-increment: q;
+    position: relative;
+    padding: 16px 0 16px 50px;
+    border-top: 1px dashed var(--line);
+  }
+  .questions li:last-child { border-bottom: 1px dashed var(--line); }
+
+  .questions li::before {
+    content: "Q" counter(q, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 16px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  footer {
+    max-width: 760px;
+    margin: 0 auto 0 244px;
+    padding-top: 8px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+  @media (max-width: 900px) { footer { margin: 0 auto; padding: 0 20px; } }
+
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+</style>
+
+<div class="titleblock">
+  <div class="titleblock-inner">
+    <div class="eyebrow">Product Requirements Document &mdash; Internal</div>
+    <h1>JustLepsPhotos</h1>
+    <p class="sub">Situs portofolio fotografer JustLeps &mdash; dokumen kebutuhan produk untuk pengembangan lanjutan dari MVP yang sudah live.</p>
+    <dl class="stamp">
+      <div><dt>Status</dt><dd>Draft &mdash; v0.1</dd></div>
+      <div><dt>Tanggal</dt><dd>12 Sep 2026</dd></div>
+      <div><dt>Pemilik</dt><dd>M. Alief Fahda Imran Oemar (JustLeps)</dd></div>
+      <div><dt>Situs Berjalan</dt><dd>alieffahdal.github.io/JustLepsPhotos</dd></div>
+    </dl>
+  </div>
+</div>
+
+<div class="shell">
+  <nav class="toc" aria-label="Daftar isi">
+    <ol>
+      <li><a href="#s1"><span class="n mono">01</span>Problem Statement</a></li>
+      <li><a href="#s2"><span class="n mono">02</span>Target User</a></li>
+      <li><a href="#s3"><span class="n mono">03</span>Goals &amp; Non-goals</a></li>
+      <li><a href="#s4"><span class="n mono">04</span>User Stories</a></li>
+      <li><a href="#s5"><span class="n mono">05</span>Daftar Fitur</a></li>
+      <li><a href="#s6"><span class="n mono">06</span>Functional Req.</a></li>
+      <li><a href="#s7"><span class="n mono">07</span>Data Model</a></li>
+      <li><a href="#s8"><span class="n mono">08</span>Edge Cases</a></li>
+      <li><a href="#s9"><span class="n mono">09</span>Success Metrics</a></li>
+      <li><a href="#s10"><span class="n mono">10</span>Open Questions</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <section id="s1">
+      <div class="sec-head"><span class="num mono">01</span><h2>Problem Statement</h2></div>
+      <p class="lede">Karya JustLeps saat ini cuma hidup di feed Instagram &mdash; dan itu merugikan tiga pihak sekaligus.</p>
+      <p><b>JustLeps sendiri</b> tidak punya satu tautan yang bisa dikirim ke calon klien atau kolaborator yang menunjukkan rentang karya secara utuh. Feed Instagram dikompres, diurutkan algoritma, dan dicampur dengan konten orang lain lewat Reels/Explore &mdash; bukan ruang pamer yang terkurasi. Menambah karya baru ke situs yang sudah dibangun pun masih berarti mengedit kode komponen (file <code class="mono">photos.ts</code>), bukan alur kerja yang berkelanjutan untuk update rutin.</p>
+      <p><b>Calon klien atau kolaborator</b> yang ingin menilai gaya dan kualitas sebelum menghubungi tidak punya cara cepat untuk melihat karya per genre atau per seri secara runtut &mdash; mereka harus scroll grid Instagram yang tidak dikurasi berdasarkan konteks tersebut.</p>
+      <p><b>Pengikut dan sesama fotografer</b> yang menikmati karya travel/street JustLeps tidak punya cara menjelajah berdasarkan cerita perjalanan atau seri tematik, dan link yang dibagikan (mis. lewat WhatsApp) tampil generik karena situs belum punya metadata SEO/social-preview yang benar.</p>
+      <p class="note">MVP statis yang sudah live (Home, Travel, Discover, Blog, About) membuktikan arah desainnya, tapi menurut arahan pemilik produk, itu dianggap starting point &mdash; bukan cakupan akhir. Dokumen ini mendefinisikan MVP yang lebih besar dari itu, tetap 100% statis (GitHub Pages, tanpa backend/database).</p>
+    </section>
+
+    <section id="s2">
+      <div class="sec-head"><span class="num mono">02</span><h2>Target User</h2></div>
+      <p>Situs ini untuk satu fotografer (JustLeps) dan single-tenant &mdash; bukan produk yang dipakai fotografer lain. Dua kelompok pengunjung di bawah adalah <b>inferensi dari struktur situs yang sudah dibangun</b> (kontak yang jelas, blog cerita perjalanan, pengelompokan seri/lokasi) dan belum dikonfirmasi langsung oleh pemilik produk &mdash; lihat <a href="#s10">Open Questions</a>.</p>
+      <div class="personas">
+        <div class="persona">
+          <div class="role mono">Persona 1</div>
+          <h3>Dinda &mdash; Klien Potensial</h3>
+          <p class="quote">&ldquo;Saya lihat satu foto JustLeps di story teman. Sebelum DM, saya mau tahu: gaya dia konsisten nggak, dan dia beneran available nggak.&rdquo;</p>
+          <ul>
+            <li>Butuh bukti visual cepat lintas genre</li>
+            <li>Butuh cara kontak yang jelas &amp; cepat direspons</li>
+            <li>Tidak mau scroll feed Instagram yang campur aduk</li>
+          </ul>
+        </div>
+        <div class="persona">
+          <div class="role mono">Persona 2</div>
+          <h3>Yoga &mdash; Sesama Fotografer / Pengikut</h3>
+          <p class="quote">&ldquo;Saya follow buat lihat progres dan cerita di balik foto perjalanan &mdash; bukan cuma hasil akhirnya.&rdquo;</p>
+          <ul>
+            <li>Ingin menjelajah karya per seri/lokasi, bukan kronologis feed</li>
+            <li>Menghargai konteks cerita (blog) di balik pemotretan</li>
+            <li>Kembali berkala &mdash; peduli pada update rutin</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3">
+      <div class="sec-head"><span class="num mono">03</span><h2>Goals &amp; Non-goals</h2></div>
+      <div class="goalgrid">
+        <div>
+          <h4>Goals</h4>
+          <ul>
+            <li>Satu tautan yang merepresentasikan karya JustLeps secara utuh &amp; terkurasi lintas genre.</li>
+            <li>Menambah/mengedit foto dan caption tanpa menyentuh kode komponen React.</li>
+            <li>Metadata SEO &amp; social-preview yang benar di tiap halaman.</li>
+            <li>Struktur &ldquo;Series&rdquo; kurasi tematik yang sebenarnya &mdash; bukan location placeholder yang dipakai sekarang.</li>
+            <li>Jalur kontak yang jelas dan konsisten di seluruh situs.</li>
+            <li>Visibilitas dasar soal traffic &amp; minat (analytics statis, privacy-friendly).</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Non-goals</h4>
+          <ul>
+            <li>Akun pengguna, login, atau galeri privat dengan autentikasi sungguhan.</li>
+            <li>Pembayaran, checkout, atau fulfilment penjualan cetak foto.</li>
+            <li>Backend/database/server-rendered content dinamis.</li>
+            <li>Komentar atau interaksi yang butuh penyimpanan sisi server.</li>
+            <li>CMS berbasis web UI &mdash; kecuali varian git-based, dan itu pun didorong ke &ldquo;Nanti&rdquo; (lihat §5).</li>
+            <li>Dukungan multi-fotografer/multi-tenant.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="s4">
+      <div class="sec-head"><span class="num mono">04</span><h2>User Stories</h2></div>
+      <ul class="stories">
+        <li>Sebagai <b>klien potensial</b>, saya ingin melihat karya yang dikurasi per genre/seri, supaya saya bisa menilai kecocokan gaya sebelum menghubungi.</li>
+        <li>Sebagai <b>klien potensial</b>, saya ingin cara kontak langsung yang jelas (bukan cuma DM Instagram), supaya saya bisa menanyakan ketersediaan tanpa hambatan.</li>
+        <li>Sebagai <b>pengikut/sesama fotografer</b>, saya ingin menjelajah foto berdasarkan seri atau lokasi, supaya saya bisa mengikuti cerita di balik tiap perjalanan.</li>
+        <li>Sebagai <b>pengikut</b>, saya ingin membaca cerita singkat di balik pemotretan tertentu, supaya saya dapat konteks yang tidak muat di caption Instagram.</li>
+        <li>Sebagai <b>JustLeps (pemilik situs)</b>, saya ingin menambah atau mengedit foto dan caption tanpa menulis ulang komponen, supaya saya bisa update situs lebih sering tanpa hambatan teknis.</li>
+        <li>Sebagai <b>JustLeps</b>, saya ingin tautan situs tampil dengan preview rapi (judul, gambar, deskripsi) saat dibagikan, supaya terlihat profesional di bio atau chat.</li>
+        <li>Sebagai <b>JustLeps</b>, saya ingin tahu halaman atau seri mana yang paling banyak dilihat, supaya saya tahu konten apa yang resonan dengan audiens.</li>
+        <li>Sebagai <b>pengunjung di HP</b>, saya ingin situs tetap cepat dan mudah dipakai di layar kecil, supaya saya tidak menunggu lama atau kesulitan navigasi.</li>
+      </ul>
+    </section>
+
+    <section id="s5">
+      <div class="sec-head"><span class="num mono">05</span><h2>Daftar Fitur</h2></div>
+      <p>Fondasi yang sudah live (Home dengan hero carousel, galeri+lightbox, Travel per lokasi, About, tema terang/gelap, responsive) tetap dipertahankan di semua tier di bawah &mdash; daftar ini fokus pada <i>penambahan</i> di atasnya.</p>
+      <div class="tiers">
+        <div class="tier mvp">
+          <h4>MVP</h4>
+          <ul>
+            <li>Content model terpisah dari kode (satu file data terstruktur, tervalidasi saat build)</li>
+            <li>Meta tag SEO + Open Graph per halaman</li>
+            <li><code class="mono">sitemap.xml</code> &amp; <code class="mono">robots.txt</code></li>
+            <li>Entitas &ldquo;Series&rdquo; kurasi tematik (menggantikan/melengkapi location)</li>
+            <li>Halaman/section Kontak dengan metode kontak nyata &amp; terklik</li>
+            <li>Analytics statis privacy-friendly (satu provider)</li>
+            <li>Dokumentasi alur &ldquo;cara tambah foto&rdquo; untuk non-engineer</li>
+          </ul>
+        </div>
+        <div class="tier v2">
+          <h4>V2</h4>
+          <ul>
+            <li>Blog penuh: tag/kategori, lebih dari 2 post starter</li>
+            <li>Discover map dengan filter genre, data lokasi sungguhan</li>
+            <li>Multi-bahasa ID/EN (menyusul pola i18n situs Education)</li>
+            <li>Newsletter sign-up (embed statis pihak ketiga)</li>
+            <li>Link-out cetak/jual foto <span class="note">&mdash; jika niat komersial dikonfirmasi</span></li>
+            <li>Optimasi gambar otomatis (responsive/AVIF)</li>
+          </ul>
+        </div>
+        <div class="tier later">
+          <h4>Nanti</h4>
+          <ul>
+            <li>Git-based CMS (mis. Decap CMS) &mdash; butuh OAuth proxy kecil, sedikit melenceng dari &ldquo;tanpa backend&rdquo;</li>
+            <li>Galeri privat per klien (butuh auth sungguhan)</li>
+            <li>Form booking dengan validasi server-side</li>
+            <li>E-commerce cetak foto penuh</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="s6">
+      <div class="sec-head"><span class="num mono">06</span><h2>Functional Requirements &mdash; MVP</h2></div>
+
+      <div class="fr">
+        <div class="tag">FR-6.1</div>
+        <h4>Pemisahan content model dari kode</h4>
+        <ul>
+          <li>Semua foto didefinisikan di satu file data terstruktur (mis. <code class="mono">content/photos.json</code>) dengan field: id, src, title, caption, category, location (opsional), seriesSlugs, capturedAt (opsional), isFeatured.</li>
+          <li>Build gagal (CI fail) jika data tidak valid terhadap skema &mdash; kesalahan format ketahuan sebelum deploy, bukan setelah live.</li>
+          <li>README di folder content menjelaskan langkah menambah foto tanpa perlu paham React.</li>
+        </ul>
+      </div>
+
+      <div class="fr">
+        <div class="tag">FR-6.2</div>
+        <h4>SEO &amp; social preview</h4>
+        <ul>
+          <li>Tiap rute (Home, Series index/detail, Blog index/post, About) render <code class="mono">&lt;title&gt;</code> dan <code class="mono">meta description</code> unik sesuai konten halaman.</li>
+          <li>Tiap rute render <code class="mono">og:title</code>, <code class="mono">og:description</code>, <code class="mono">og:image</code>, <code class="mono">og:url</code> &mdash; og:image memakai foto representatif halaman tersebut.</li>
+          <li><code class="mono">sitemap.xml</code> ter-generate saat build, mencakup semua rute statis yang valid.</li>
+          <li><code class="mono">robots.txt</code> mengizinkan crawling penuh dan mereferensikan sitemap.</li>
+        </ul>
+      </div>
+
+      <div class="fr">
+        <div class="tag">FR-6.3</div>
+        <h4>Entitas Series</h4>
+        <ul>
+          <li>Series punya: slug, name, description, cover photo, daftar foto anggota &mdash; relasi many-to-many dengan Photo (satu foto boleh masuk lebih dari satu seri).</li>
+          <li>Halaman index Series: daftar semua seri dengan cover, nama, jumlah foto.</li>
+          <li>Halaman detail Series: pakai ulang pola galeri+lightbox yang sudah ada.</li>
+        </ul>
+      </div>
+
+      <div class="fr">
+        <div class="tag">FR-6.4</div>
+        <h4>Kontak</h4>
+        <ul>
+          <li>Section/halaman Kontak menampilkan minimal satu metode kontak yang bisa langsung diklik (<code class="mono">mailto:</code> atau <code class="mono">wa.me</code>) &mdash; bukan cuma tautan Instagram.</li>
+          <li>Semua CTA &ldquo;Contact me&rdquo; di situs mengarah konsisten ke halaman/section kontak yang sama.</li>
+          <li>Tidak ada form submit ke server sendiri (selaras batasan statis). Kalau butuh form, wajib pakai layanan pihak ketiga &mdash; keputusan providernya ditandai sebagai open question (§10) karena berimplikasi pada privasi data pengunjung.</li>
+        </ul>
+      </div>
+
+      <div class="fr">
+        <div class="tag">FR-6.5</div>
+        <h4>Analytics statis</h4>
+        <ul>
+          <li>Satu snippet analytics privacy-friendly (kandidat: Plausible, GoatCounter, atau Cloudflare Web Analytics) dipasang lewat layout bersama &mdash; bukan disalin manual per halaman.</li>
+          <li>Tidak menyimpan data pribadi pengunjung; provider yang dipilih harus cookieless supaya tidak perlu cookie-consent banner.</li>
+          <li>Pemilihan provider spesifik ditandai sebagai open question (§10).</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="s7">
+      <div class="sec-head"><span class="num mono">07</span><h2>Sketsa Data Model</h2></div>
+
+      <div class="entity-block">
+        <div class="tablewrap">
+          <table>
+            <caption>Photo</caption>
+            <thead><tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr></thead>
+            <tbody>
+              <tr><td>id</td><td>string</td><td class="desc">Unik per foto</td></tr>
+              <tr><td>src</td><td>string</td><td class="desc">Path aset gambar</td></tr>
+              <tr><td>title</td><td>string</td><td class="desc">Judul tampil</td></tr>
+              <tr><td>caption</td><td>string?</td><td class="desc">Opsional, cerita singkat</td></tr>
+              <tr><td>category</td><td>enum</td><td class="desc">portrait / landscape / street / travel</td></tr>
+              <tr><td>location</td><td>object?</td><td class="desc">{ place, country, lat, lng } &mdash; opsional</td></tr>
+              <tr><td>seriesSlugs</td><td>string[]</td><td class="desc">Bisa masuk lebih dari satu Series</td></tr>
+              <tr><td>capturedAt</td><td>date?</td><td class="desc">Opsional</td></tr>
+              <tr><td>isFeatured</td><td>boolean</td><td class="desc">Default false</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="entity-block">
+        <div class="tablewrap">
+          <table>
+            <caption>Series</caption>
+            <thead><tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr></thead>
+            <tbody>
+              <tr><td>slug</td><td>string</td><td class="desc">Unik</td></tr>
+              <tr><td>name</td><td>string</td><td class="desc">Nama seri kurasi</td></tr>
+              <tr><td>description</td><td>string</td><td class="desc">Konteks singkat seri</td></tr>
+              <tr><td>coverPhotoId</td><td>ref &rarr; Photo.id</td><td class="desc">Foto sampul</td></tr>
+              <tr><td>photoIds</td><td>derived</td><td class="desc">Semua Photo dengan seriesSlugs berisi slug ini</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="entity-block">
+        <div class="tablewrap">
+          <table>
+            <caption>Location</caption>
+            <thead><tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr></thead>
+            <tbody>
+              <tr><td>slug, place, country</td><td>string</td><td class="desc">Metadata geografis</td></tr>
+              <tr><td>lat, lng</td><td>number</td><td class="desc">Untuk pin peta Discover</td></tr>
+              <tr><td>photos</td><td>derived</td><td class="desc">Turunan dari Photo.location &mdash; bukan lagi struktur navigasi utama</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="entity-block">
+        <div class="tablewrap">
+          <table>
+            <caption>BlogPost</caption>
+            <thead><tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr></thead>
+            <tbody>
+              <tr><td>slug, title, excerpt</td><td>string</td><td class="desc">Sudah ada</td></tr>
+              <tr><td>cover</td><td>string</td><td class="desc">Sudah ada</td></tr>
+              <tr><td>paragraphs</td><td>string[]</td><td class="desc">Sudah ada</td></tr>
+              <tr><td>publishedAt</td><td>date</td><td class="desc"><b>Baru</b> &mdash; untuk urutan &amp; sitemap</td></tr>
+              <tr><td>tags</td><td>string[]</td><td class="desc"><b>Baru</b> &mdash; untuk v2 filter</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="entity-block">
+        <div class="tablewrap">
+          <table>
+            <caption>ContactMethod &amp; SiteMeta (konfigurasi, bukan data pengguna)</caption>
+            <thead><tr><th>Entitas</th><th>Field</th><th>Keterangan</th></tr></thead>
+            <tbody>
+              <tr><td>ContactMethod</td><td>type, value/href, isPrimary</td><td class="desc">email / whatsapp / instagram</td></tr>
+              <tr><td>SiteMeta</td><td>route, title, description, ogImage</td><td class="desc">Satu entri per rute untuk FR-6.2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="s8">
+      <div class="sec-head"><span class="num mono">08</span><h2>Edge Cases &amp; Failure States</h2></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th style="width:38%">Situasi</th><th>Perilaku yang diharapkan</th></tr></thead>
+          <tbody>
+            <tr><td>Foto tanpa lokasi/seri sama sekali</td><td class="prose">Tetap muncul di galeri utama/Home &mdash; tidak boleh &ldquo;hilang&rdquo; karena tidak match filter manapun.</td></tr>
+            <tr><td>Series dengan 1 foto saja</td><td class="prose">Halaman detail tetap valid, bukan galeri kosong.</td></tr>
+            <tr><td>Slug series/blog yang tidak ada</td><td class="prose">Render 404 aplikasi (sudah ada) &mdash; bukan crash React.</td></tr>
+            <tr><td>Deep link ke rute client-side saat refresh/share pertama kali</td><td class="prose">Sudah diperbaiki (trik redirect 404 GitHub Pages) &mdash; wajib jadi regression test di tiap deploy baru.</td></tr>
+            <tr><td>File data foto tidak valid / field wajib kosong</td><td class="prose">Build gagal di CI &mdash; situs rusak tidak boleh ter-ship diam-diam.</td></tr>
+            <tr><td>Gambar sumber terlalu besar (&gt;~5MB)</td><td class="prose">Build warn/fail sebagai guardrail dasar &mdash; optimasi otomatis penuh didorong ke v2.</td></tr>
+            <tr><td>Script analytics diblokir ad-blocker</td><td class="prose">Situs tetap jalan normal; event cuma silently tidak tercatat.</td></tr>
+            <tr><td>Koneksi lambat / gambar belum termuat</td><td class="prose"><code class="mono">loading="lazy"</code> (sudah ada) + aspect-ratio eksplisit &mdash; tidak boleh ada layout shift signifikan.</td></tr>
+            <tr><td>localStorage diblokir (tema terang/gelap)</td><td class="prose">Fallback ke <code class="mono">prefers-color-scheme</code> tanpa error.</td></tr>
+            <tr><td>Discover map dengan 1 lokasi saja</td><td class="prose"><code class="mono">fitBounds</code> tidak boleh error atau zoom ekstrem.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="s9">
+      <div class="sec-head"><span class="num mono">09</span><h2>Success Metrics</h2></div>
+      <div class="metric-row" style="border-top:none; padding-top:0;">
+        <div class="m-name">Pengunjung unik / bulan</div>
+        <div class="m-how mono">Analytics statis</div>
+        <div class="m-note">Baseline diambil di bulan pertama MVP baru live.</div>
+      </div>
+      <div class="metric-row">
+        <div class="m-name">Klik ke metode kontak</div>
+        <div class="m-how mono">Event tracking sederhana</div>
+        <div class="m-note">Proxy minat serius, bukan sekadar traffic pasif.</div>
+      </div>
+      <div class="metric-row">
+        <div class="m-name">% pengunjung &gt;1 halaman</div>
+        <div class="m-how mono">Analytics statis</div>
+        <div class="m-note">Proxy eksplorasi &mdash; bukan cuma bounce ke Home.</div>
+      </div>
+      <div class="metric-row">
+        <div class="m-name">Waktu tambah-foto &rarr; live</div>
+        <div class="m-how mono">Self-report JustLeps</div>
+        <div class="m-note">Mengukur apakah pemisahan content model beneran mempercepat workflow &mdash; kualitatif, bukan angka keras.</div>
+      </div>
+      <div class="metric-row">
+        <div class="m-name">Kelengkapan SEO per halaman</div>
+        <div class="m-how mono">Cek manual / Lighthouse</div>
+        <div class="m-note">Pass/fail per halaman utama, bukan skor numerik ambisius.</div>
+      </div>
+      <p class="metric-warn">Tanpa backend/analytics server, metrik funnel komersial (booking closed, penjualan cetak, dsb.) <b>tidak bisa diukur</b> di MVP ini. Kalau itu jadi tujuan, produk perlu re-scope &mdash; lihat Q01.</p>
+    </section>
+
+    <section id="s10">
+      <div class="sec-head"><span class="num mono">10</span><h2>Open Questions</h2></div>
+      <ul class="questions">
+        <li>Apakah situs punya niat komersial (terima booking/jasa foto, jual cetak) atau murni portofolio kreatif/personal? Menentukan relevansi fitur booking, halaman layanan/harga, dan link jual-beli di v2.</li>
+        <li>Siapa target audiens sebenarnya menurut JustLeps &mdash; calon klien, sesama fotografer, followers Instagram, atau kombinasi? Dua persona di §2 adalah inferensi dari struktur situs, belum dikonfirmasi.</li>
+        <li>Provider analytics statis mana yang dipilih (Plausible / GoatCounter / Cloudflare / lainnya)? Ada implikasi biaya &amp; kepemilikan data.</li>
+        <li>Kalau butuh form kontak sungguhan (bukan cuma mailto/wa.me), layanan pihak ketiga mana yang boleh dipakai? Perlu persetujuan eksplisit karena data submission lewat pihak ketiga.</li>
+        <li>Apakah &ldquo;Series&rdquo; menggantikan sepenuhnya struktur Travel/lokasi yang sudah ada, atau keduanya dipertahankan berdampingan (lokasi = geografis, series = kurasi tematik)?</li>
+        <li>Berapa target volume foto realistis dalam 6&ndash;12 bulan ke depan? Memengaruhi apakah content model JSON manual cukup, atau perlu tooling tambahan (mis. CLI bantu entri).</li>
+        <li>Apakah 12 foto yang sudah ada di situs saat ini tetap dipakai sebagai draft, atau akan diganti sebagian besar dengan foto kurasi baru sebelum MVP ini dianggap &ldquo;selesai&rdquo;?</li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<footer>JustLepsPhotos PRD &middot; v0.1 &middot; Dokumen internal, bukan untuk distribusi eksternal</footer>
