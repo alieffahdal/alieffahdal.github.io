@@ -1,0 +1,759 @@
+<title>JustLepsPhotos Design Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #f2f2f0;
+    --surface: #ffffff;
+    --surface-2: #f6f6f4;
+    --ink: #17171a;
+    --ink-dim: #6b6b70;
+    --ink-faint: #97979b;
+    --line: #e4e4e1;
+    --accent: #f6ad55;
+    --accent-text: #a8591e;
+    --accent-ink: #ffffff;
+    --success: #3f8a34;
+    --success-ink: #ffffff;
+    --error: #c23b34;
+    --error-ink: #ffffff;
+    --shadow-sm: 0 1px 2px rgba(20,20,15,0.08);
+    --shadow-md: 0 8px 24px rgba(20,20,15,0.12);
+    --shadow-lg: 0 24px 64px rgba(20,20,15,0.18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0a0a0b;
+      --surface: #17171a;
+      --surface-2: #1f1f23;
+      --ink: #f5f5f4;
+      --ink-dim: #9a9aa2;
+      --ink-faint: #6c6c72;
+      --line: #2a2a2f;
+      --accent: #f6ad55;
+      --accent-text: #f6ad55;
+      --accent-ink: #1a1207;
+      --success: #7fb069;
+      --success-ink: #0d1b0a;
+      --error: #e2564f;
+      --error-ink: #200504;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.5);
+      --shadow-lg: 0 24px 64px rgba(0,0,0,0.6);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0a0a0b;
+    --surface: #17171a;
+    --surface-2: #1f1f23;
+    --ink: #f5f5f4;
+    --ink-dim: #9a9aa2;
+    --ink-faint: #6c6c72;
+    --line: #2a2a2f;
+    --accent: #f6ad55;
+    --accent-text: #f6ad55;
+    --accent-ink: #1a1207;
+    --success: #7fb069;
+    --success-ink: #0d1b0a;
+    --error: #e2564f;
+    --error-ink: #200504;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+    --shadow-md: 0 8px 24px rgba(0,0,0,0.5);
+    --shadow-lg: 0 24px 64px rgba(0,0,0,0.6);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 { font-family: "Fraunces", Georgia, serif; margin: 0; text-wrap: balance; color: var(--ink); }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  a { color: var(--accent-text); }
+  code { font-family: "IBM Plex Mono", monospace; background: var(--surface-2); border: 1px solid var(--line); border-radius: 4px; padding: 0.1em 0.4em; font-size: 0.88em; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 2px; }
+
+  .shell { max-width: 1180px; margin: 0 auto; padding: 0 24px 100px; display: grid; grid-template-columns: 210px minmax(0,900px); gap: 56px; justify-content: center; }
+  @media (max-width: 920px) { .shell { grid-template-columns: minmax(0,1fr); gap: 0; padding: 0 20px 72px; } .toc { display: none; } }
+
+  .titleblock { max-width: 1180px; margin: 0 auto; padding: 56px 24px 40px; border-bottom: 1px solid var(--line); }
+  .titleblock-inner { max-width: 900px; margin: 0 auto 0 266px; }
+  @media (max-width: 920px) { .titleblock-inner { margin: 0 auto; } }
+  .eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-text); font-weight: 600; }
+  .titleblock h1 { font-size: clamp(34px, 5vw, 52px); font-weight: 600; font-style: italic; letter-spacing: -0.01em; margin-top: 8px; }
+  .titleblock .sub { color: var(--ink-dim); font-size: 18px; margin-top: 12px; max-width: 62ch; font-family: "Instrument Sans", sans-serif; }
+  .stamp { margin-top: 26px; display: grid; grid-template-columns: repeat(4, auto); gap: 20px 32px; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
+  @media (max-width: 640px) { .stamp { grid-template-columns: repeat(2, auto); } }
+  .stamp dt { color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.07em; font-size: 10.5px; margin: 0; }
+  .stamp dd { margin: 3px 0 0; }
+
+  .toc { position: sticky; top: 40px; align-self: start; padding-top: 48px; }
+  .toc ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  .toc a { display: flex; gap: 9px; padding: 6px 9px; margin-left: -9px; border-radius: 6px; color: var(--ink-dim); text-decoration: none; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
+  .toc a:hover { color: var(--ink); background: var(--surface-2); }
+  .toc a span.n { color: var(--ink-faint); }
+
+  main { padding-top: 48px; min-width: 0; }
+  section { margin-bottom: 76px; scroll-margin-top: 24px; }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px; padding-bottom: 14px; border-bottom: 2px solid var(--ink); }
+  .sec-head .num { font-family: "IBM Plex Mono", monospace; font-size: 14px; color: var(--accent-text); font-weight: 600; }
+  .sec-head h2 { font-size: 26px; font-weight: 600; font-style: italic; }
+  section > p { margin: 0 0 14px; max-width: 74ch; }
+  .lede { font-size: 18.5px; color: var(--ink); font-family: "Fraunces", serif; }
+  .note { font-size: 14px; color: var(--ink-dim); }
+
+  /* principles */
+  .principles { display: flex; flex-direction: column; gap: 18px; margin-top: 20px; }
+  .principle { display: grid; grid-template-columns: 56px 1fr; gap: 20px; padding: 20px 0; border-top: 1px solid var(--line); }
+  .principle:last-child { border-bottom: 1px solid var(--line); }
+  .principle .pn { font-family: "Fraunces", serif; font-style: italic; font-size: 34px; color: var(--accent-text); line-height: 1; }
+  .principle h3 { font-size: 19px; font-weight: 600; margin-bottom: 6px; }
+  .principle p { color: var(--ink-dim); font-size: 15px; margin: 0; max-width: 68ch; }
+
+  /* visual direction */
+  .refgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 22px 0; }
+  @media (max-width: 700px) { .refgrid { grid-template-columns: 1fr; } }
+  .refcard { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 18px 20px; }
+  .refcard .k { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); }
+  .refcard h4 { font-size: 16px; font-family: "Fraunces", serif; margin: 6px 0 8px; }
+  .refcard p { margin: 0; font-size: 13.5px; color: var(--ink-dim); }
+
+  .avoidbox { margin-top: 20px; padding: 16px 18px; background: var(--surface-2); border-left: 3px solid var(--error); border-radius: 0 10px 10px 0; }
+  .avoidbox .k { font-family: "IBM Plex Mono", monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--error); font-weight: 600; }
+  .avoidbox ul { margin: 8px 0 0; padding-left: 18px; font-size: 14.5px; color: var(--ink-dim); }
+  .avoidbox li { margin-bottom: 4px; }
+
+  /* tokens */
+  .tok-h { font-family: "IBM Plex Mono", monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); margin: 32px 0 14px; }
+  .tok-h:first-child { margin-top: 8px; }
+
+  .swrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+  .sw { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+  .sw .chip { height: 64px; }
+  .sw .lab { padding: 8px 10px 10px; background: var(--surface); font-family: "IBM Plex Mono", monospace; font-size: 11.5px; }
+  .sw .lab .name { display: block; color: var(--ink); font-weight: 600; }
+  .sw .lab .hex { display: block; color: var(--ink-dim); margin-top: 2px; }
+
+  .typescale { display: flex; flex-direction: column; gap: 0; margin-top: 6px; }
+  .type-row { display: grid; grid-template-columns: 130px 1fr; gap: 18px; align-items: baseline; padding: 14px 0; border-top: 1px solid var(--line); }
+  .type-row:last-child { border-bottom: 1px solid var(--line); }
+  .type-row .meta { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--ink-faint); line-height: 1.5; }
+  .type-row .sample { font-family: "Fraunces", serif; }
+  .type-row.ui .sample { font-family: "Instrument Sans", sans-serif; }
+  .type-row.data .sample { font-family: "IBM Plex Mono", monospace; }
+
+  .spacebars { display: flex; align-items: flex-end; gap: 14px; margin-top: 16px; height: 100px; }
+  .sbar { display: flex; flex-direction: column; align-items: center; gap: 8px; justify-content: flex-end; height: 100%; }
+  .sbar .bar { width: 22px; background: var(--accent); border-radius: 3px 3px 0 0; }
+  .sbar .lab { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; color: var(--ink-faint); }
+
+  .radiusrow, .shadowrow { display: flex; gap: 18px; margin-top: 16px; flex-wrap: wrap; }
+  .rdemo { width: 84px; height: 84px; background: var(--surface-2); border: 1px solid var(--line); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-family: "IBM Plex Mono", monospace; font-size: 10.5px; color: var(--ink-faint); }
+  .shdemo { width: 140px; height: 84px; background: var(--surface); border-radius: 14px; display: flex; align-items: flex-end; padding: 10px 12px; font-family: "IBM Plex Mono", monospace; font-size: 10.5px; color: var(--ink-faint); }
+
+  /* screen inventory + generic tables */
+  .tablewrap { overflow-x: auto; margin-top: 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
+  th { text-align: left; font-family: "IBM Plex Mono", monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); font-weight: 600; padding: 8px 16px 8px 0; border-bottom: 1px solid var(--ink); }
+  td { padding: 12px 16px 12px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td.prose { color: var(--ink-dim); font-size: 13.5px; }
+  td strong { font-family: "Fraunces", serif; font-weight: 600; }
+
+  /* flows */
+  .flow { margin-top: 20px; }
+  .flow h4 { font-family: "IBM Plex Mono", monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--accent-text); margin-bottom: 12px; }
+  .flowsteps { list-style: none; margin: 0; padding: 0; counter-reset: fs; }
+  .flowsteps li { counter-increment: fs; position: relative; padding: 12px 0 12px 42px; border-top: 1px solid var(--line); font-size: 15px; }
+  .flowsteps li:last-child { border-bottom: 1px solid var(--line); }
+  .flowsteps li::before { content: counter(fs); position: absolute; left: 0; top: 12px; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .flowsteps b { color: var(--accent-text); }
+
+  /* screen layout blocks */
+  .screenblock { border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; margin-bottom: 18px; background: var(--surface); }
+  .screenblock h4 { font-family: "Fraunces", serif; font-size: 19px; margin: 0 0 4px; }
+  .screenblock .purpose { color: var(--ink-dim); font-size: 14px; margin-bottom: 16px; }
+  .sb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 700px) { .sb-grid { grid-template-columns: 1fr; } }
+  .sb-grid h5 { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-faint); margin: 0 0 8px; }
+  .sb-grid ol, .sb-grid ul { margin: 0; padding-left: 18px; font-size: 13.5px; }
+  .sb-grid li { margin-bottom: 5px; }
+  .primaryaction { display: inline-block; margin-top: 4px; font-size: 13px; background: var(--accent-wash, transparent); }
+  .pa-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-family: "IBM Plex Mono", monospace; font-size: 11.5px; font-weight: 600; }
+
+  /* component demos */
+  .btn { font-family: "Instrument Sans", sans-serif; font-weight: 600; font-size: 14px; padding: 10px 20px; border-radius: 999px; border: 1px solid transparent; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  .btn-solid { background: var(--accent); color: var(--accent-ink); }
+  .btn-outline { background: transparent; color: var(--ink); border-color: var(--line); }
+  .btn-ghost { background: transparent; color: var(--ink-dim); }
+  .btn[disabled] { opacity: 0.4; cursor: not-allowed; }
+  .badge { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 3px 9px; border-radius: 999px; }
+  .badge-new { background: var(--ink); color: var(--bg); }
+  .badge-count { background: var(--surface-2); color: var(--ink-dim); border: 1px solid var(--line); }
+  .demo-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin: 14px 0 22px; }
+
+  .complist { list-style: none; margin: 0; padding: 0; }
+  .compitem { padding: 18px 0; border-top: 1px solid var(--line); }
+  .compitem:last-child { border-bottom: 1px solid var(--line); }
+  .compitem h4 { font-family: "Fraunces", serif; font-size: 17px; margin: 0 0 8px; }
+  .compitem .row { display: grid; grid-template-columns: 90px 1fr; gap: 12px; font-size: 13.5px; margin-bottom: 4px; }
+  .compitem .row .k { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; text-transform: uppercase; color: var(--ink-faint); letter-spacing: 0.06em; padding-top: 2px; }
+  .compitem .row .v { color: var(--ink-dim); }
+
+  /* states table */
+  .statetable td:first-child { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--accent-text); font-weight: 600; white-space: nowrap; }
+
+  /* a11y contrast demo */
+  .contrastrow { display: grid; grid-template-columns: 140px 1fr 90px; gap: 14px; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); font-size: 13.5px; }
+  .contrastrow:last-child { border-bottom: 1px solid var(--line); }
+  .cswatch { height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: "IBM Plex Mono", monospace; font-size: 12px; border: 1px solid var(--line); }
+  .cratio { font-family: "IBM Plex Mono", monospace; font-weight: 700; text-align: right; }
+  .cratio.pass { color: var(--success); }
+
+  footer { max-width: 900px; margin: 0 auto 0 266px; padding-top: 8px; font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink-faint); }
+  @media (max-width: 920px) { footer { margin: 0 auto; padding: 0 20px; } }
+
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+</style>
+
+<div class="titleblock">
+  <div class="titleblock-inner">
+    <div class="eyebrow">Design Brief &mdash; Based on PRD v0.2</div>
+    <h1>JustLepsPhotos</h1>
+    <p class="sub">Spesifikasi desain lengkap sebelum implementasi &mdash; prinsip, token, layout tiap layar, komponen, state, dan aksesibilitas.</p>
+    <dl class="stamp">
+      <div><dt>Status</dt><dd>Draft &mdash; v0.1</dd></div>
+      <div><dt>Tanggal</dt><dd>17 Sep 2026</dd></div>
+      <div><dt>Berdasarkan</dt><dd>JustLepsPhotos PRD v0.2</dd></div>
+      <div><dt>Fondasi</dt><dd>MVP live di /JustLepsPhotos</dd></div>
+    </dl>
+  </div>
+</div>
+
+<div class="shell">
+  <nav class="toc" aria-label="Daftar isi">
+    <ol>
+      <li><a href="#s1"><span class="n mono">01</span>Prinsip</a></li>
+      <li><a href="#s2"><span class="n mono">02</span>Arah Visual</a></li>
+      <li><a href="#s3"><span class="n mono">03</span>Design Tokens</a></li>
+      <li><a href="#s4"><span class="n mono">04</span>Screen Inventory</a></li>
+      <li><a href="#s5"><span class="n mono">05</span>User Flow</a></li>
+      <li><a href="#s6"><span class="n mono">06</span>Layout / Screen</a></li>
+      <li><a href="#s7"><span class="n mono">07</span>Komponen</a></li>
+      <li><a href="#s8"><span class="n mono">08</span>State</a></li>
+      <li><a href="#s9"><span class="n mono">09</span>Responsive</a></li>
+      <li><a href="#s10"><span class="n mono">10</span>Aksesibilitas</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <section id="s1">
+      <div class="sec-head"><span class="num mono">01</span><h2>Design Principles</h2></div>
+      <p class="lede">Tiga aturan ini mengalahkan preferensi estetika kapan pun keduanya bentrok.</p>
+      <div class="principles">
+        <div class="principle">
+          <div class="pn">1</div>
+          <div>
+            <h3>Foto adalah UI utama &mdash; chrome harus diam</h3>
+            <p>Produk ini portofolio foto, bukan aplikasi produktivitas. Setiap elemen non-foto (nav, tombol, label) harus punya kontras visual rendah terhadap foto di sekitarnya. Warna aksen (amber) hanya boleh dipakai pada area kecil &amp; state aktif/CTA &mdash; tidak pernah sebagai fill besar berdampingan dengan foto. Kalau ragu antara &ldquo;elemen UI ini menarik perhatian atau tidak&rdquo;, jawabannya harus tidak.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="pn">2</div>
+          <div>
+            <h3>Satu foto, satu konteks, satu klik</h3>
+            <p>Setiap foto yang muncul di grid manapun (Home, Series, Location) wajib berjarak maksimal satu klik dari: (a) versi resolusi penuh (lightbox), dan (b) konteks tempatnya (seri atau lokasi asal). Foto tidak boleh tampil &ldquo;telanjang&rdquo; tanpa jalan ke ceritanya &mdash; ini konsekuensi langsung dari tujuan PRD soal penemuan berbasis cerita, bukan cuma grid Instagram kedua.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="pn">3</div>
+          <div>
+            <h3>Tidak ada state yang diam-diam gagal</h3>
+            <p>Situs ini statis, tanpa backend untuk mencatat error. Satu-satunya sinyal kegagalan yang tersedia adalah apa yang terlihat di layar pengunjung saat itu juga &mdash; maka setiap degradasi (peta gagal muat, foto gagal load, klik kontak) wajib punya representasi visual eksplisit dan actionable. &ldquo;Diam saja&rdquo; bukan state yang valid.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s2">
+      <div class="sec-head"><span class="num mono">02</span><h2>Arah Visual</h2></div>
+      <p class="lede">Mood: kamar gelap yang tenang untuk melihat kontak sheet &mdash; bukan galeri putih steril.</p>
+      <p>Palet gelap + aksen amber pada MVP yang sudah live <b>dipertahankan secara sengaja</b>, bukan default. Amber di sini bukan pilihan estetik generik &mdash; warna itu literal muncul di sebagian besar foto JustLeps sendiri (golden hour di Prambanan, lampu jalan di foto street). Mempertahankannya berarti UI meminjam warna dari konten, bukan menimpanya.</p>
+      <div class="refgrid">
+        <div class="refcard">
+          <div class="k mono">Referensi 01</div>
+          <h4>Kontak sheet analog</h4>
+          <p>Nomor bingkai, coretan grease-pencil merah menyeleksi cuadro terbaik &rarr; jadi dasar badge angka pada Series &amp; count di peta Discover.</p>
+        </div>
+        <div class="refcard">
+          <div class="k mono">Referensi 02</div>
+          <h4>Editorial travel print</h4>
+          <p>Ruang negatif besar, tipografi judul yang berani, foto full-bleed &mdash; bukan grid rapat ala dashboard.</p>
+        </div>
+        <div class="refcard">
+          <div class="k mono">Referensi 03</div>
+          <h4>Sera Photography (live)</h4>
+          <p>Struktur split-layout, hero notch, kartu rounded &mdash; dipertahankan karena sudah live &amp; disetujui, jadi fondasi bukan titik awal ulang.</p>
+        </div>
+      </div>
+      <div class="avoidbox">
+        <div class="k">Dihindari</div>
+        <ul>
+          <li>Gradient ungu&ndash;biru generik pada hero</li>
+          <li>Emoji sebagai penanda section atau ikon fungsional</li>
+          <li>Satu radius &amp; satu shadow ditempel di semua elemen tanpa hierarki</li>
+          <li>Stat tile ala dashboard analitik &mdash; produk ini bukan tool data</li>
+          <li>Aksen neon/sangat jenuh yang bersaing kontras dengan foto itu sendiri</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="s3">
+      <div class="sec-head"><span class="num mono">03</span><h2>Design Tokens</h2></div>
+
+      <div class="tok-h">Warna &mdash; Dark (default)</div>
+      <div class="swrow">
+        <div class="sw"><div class="chip" style="background:#0a0a0b"></div><div class="lab"><span class="name">bg</span><span class="hex">#0a0a0b</span></div></div>
+        <div class="sw"><div class="chip" style="background:#17171a"></div><div class="lab"><span class="name">surface</span><span class="hex">#17171a</span></div></div>
+        <div class="sw"><div class="chip" style="background:#1f1f23"></div><div class="lab"><span class="name">surface-2</span><span class="hex">#1f1f23</span></div></div>
+        <div class="sw"><div class="chip" style="background:#f5f5f4"></div><div class="lab"><span class="name">ink</span><span class="hex">#f5f5f4</span></div></div>
+        <div class="sw"><div class="chip" style="background:#9a9aa2"></div><div class="lab"><span class="name">ink-dim</span><span class="hex">#9a9aa2</span></div></div>
+        <div class="sw"><div class="chip" style="background:#f6ad55"></div><div class="lab"><span class="name">accent</span><span class="hex">#f6ad55</span></div></div>
+        <div class="sw"><div class="chip" style="background:#7fb069"></div><div class="lab"><span class="name">success</span><span class="hex">#7fb069</span></div></div>
+        <div class="sw"><div class="chip" style="background:#e2564f"></div><div class="lab"><span class="name">error</span><span class="hex">#e2564f</span></div></div>
+      </div>
+
+      <div class="tok-h">Warna &mdash; Light</div>
+      <div class="swrow">
+        <div class="sw"><div class="chip" style="background:#f2f2f0"></div><div class="lab"><span class="name">bg</span><span class="hex">#f2f2f0</span></div></div>
+        <div class="sw"><div class="chip" style="background:#ffffff;border-bottom:1px solid #e4e4e1"></div><div class="lab"><span class="name">surface</span><span class="hex">#ffffff</span></div></div>
+        <div class="sw"><div class="chip" style="background:#f6f6f4"></div><div class="lab"><span class="name">surface-2</span><span class="hex">#f6f6f4</span></div></div>
+        <div class="sw"><div class="chip" style="background:#17171a"></div><div class="lab"><span class="name">ink</span><span class="hex">#17171a</span></div></div>
+        <div class="sw"><div class="chip" style="background:#6b6b70"></div><div class="lab"><span class="name">ink-dim</span><span class="hex">#6b6b70</span></div></div>
+        <div class="sw"><div class="chip" style="background:#a8591e"></div><div class="lab"><span class="name">accent-text</span><span class="hex">#a8591e</span></div></div>
+        <div class="sw"><div class="chip" style="background:#3f8a34"></div><div class="lab"><span class="name">success</span><span class="hex">#3f8a34</span></div></div>
+        <div class="sw"><div class="chip" style="background:#c23b34"></div><div class="lab"><span class="name">error</span><span class="hex">#c23b34</span></div></div>
+      </div>
+      <p class="note" style="margin-top:14px">Keputusan tegas: amber mentah (<code>#f6ad55</code>) di mode terang gagal kontras teks (&asymp;1.9:1 terhadap putih &mdash; jauh di bawah 4.5:1). Token baru <code>--accent-text: #a8591e</code> (&asymp;5.1:1) dipakai untuk teks/label/tombol solid di mode terang; <code>#f6ad55</code> tetap dipakai untuk dekorasi non-teks (dot carousel, border tipis). Lihat perhitungan penuh di §10.</p>
+
+      <div class="tok-h">Tipografi</div>
+      <p class="note">Tiga peran, tiga typeface &mdash; tidak ada yang saling menggantikan. <b>Fraunces</b> (serif ekspresif, italic-nya hangat) untuk judul &amp; identitas editorial. <b>Instrument Sans</b> (grotesk humanis, netral) untuk seluruh UI &amp; body copy supaya interface tidak bersaing dengan foto. <b>IBM Plex Mono</b> untuk data (koordinat, tanggal, label) &mdash; meniru cap data di tepi film analog.</p>
+      <div class="typescale">
+        <div class="type-row"><div class="meta">Display<br>56 / 600 italic</div><div class="sample" style="font-size:44px;font-weight:600;font-style:italic;line-height:1.05">Capturing quiet moments</div></div>
+        <div class="type-row"><div class="meta">H1<br>40 / 600</div><div class="sample" style="font-size:36px;font-weight:600">Yogyakarta</div></div>
+        <div class="type-row"><div class="meta">H2<br>28 / 600</div><div class="sample" style="font-size:26px;font-weight:600">Selected Work</div></div>
+        <div class="type-row"><div class="meta">H3<br>20 / 500</div><div class="sample" style="font-size:19px;font-weight:500">Latest Travel</div></div>
+        <div class="type-row ui"><div class="meta">Body<br>17 / 400</div><div class="sample" style="font-size:17px">Situs portofolio dengan gaya travel dan street photography.</div></div>
+        <div class="type-row ui"><div class="meta">Small<br>14 / 400</div><div class="sample" style="font-size:14px;color:var(--ink-dim)">Diambil di Yogyakarta, Indonesia.</div></div>
+        <div class="type-row data"><div class="meta">Micro / label<br>12 / 500, +0.06em</div><div class="sample" style="font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase">Selected Work &middot; -7.7956, 110.3695</div></div>
+      </div>
+
+      <div class="tok-h">Spacing scale (px)</div>
+      <div class="spacebars">
+        <div class="sbar"><div class="bar" style="height:4px"></div><div class="lab">4</div></div>
+        <div class="sbar"><div class="bar" style="height:8px"></div><div class="lab">8</div></div>
+        <div class="sbar"><div class="bar" style="height:12px"></div><div class="lab">12</div></div>
+        <div class="sbar"><div class="bar" style="height:16px"></div><div class="lab">16</div></div>
+        <div class="sbar"><div class="bar" style="height:24px"></div><div class="lab">24</div></div>
+        <div class="sbar"><div class="bar" style="height:32px"></div><div class="lab">32</div></div>
+        <div class="sbar"><div class="bar" style="height:48px"></div><div class="lab">48</div></div>
+        <div class="sbar"><div class="bar" style="height:64px"></div><div class="lab">64</div></div>
+        <div class="sbar"><div class="bar" style="height:96px"></div><div class="lab">96</div></div>
+      </div>
+
+      <div class="tok-h">Radius</div>
+      <div class="radiusrow">
+        <div class="rdemo" style="border-radius:12px">sm &middot; 12</div>
+        <div class="rdemo" style="border-radius:20px">md &middot; 20</div>
+        <div class="rdemo" style="border-radius:28px">lg &middot; 28</div>
+      </div>
+      <p class="note" style="margin-top:10px">Dipertahankan dari kode yang sudah live &mdash; radius besar (28px) dicadangkan untuk kontainer foto utama (hero, lightbox), radius kecil (12px) untuk kontrol UI (tombol, badge).</p>
+
+      <div class="tok-h">Shadow (elevation)</div>
+      <div class="shadowrow">
+        <div class="shdemo" style="box-shadow:var(--shadow-sm)">sm &mdash; card</div>
+        <div class="shdemo" style="box-shadow:var(--shadow-md)">md &mdash; dropdown</div>
+        <div class="shdemo" style="box-shadow:var(--shadow-lg)">lg &mdash; lightbox</div>
+      </div>
+    </section>
+
+    <section id="s4">
+      <div class="sec-head"><span class="num mono">04</span><h2>Screen Inventory</h2></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Screen</th><th>Rute</th><th>Tujuan</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Home</strong></td><td class="mono">/</td><td class="prose">Kesan pertama &amp; ringkasan seluruh karya &mdash; carousel unggulan, profil, teaser Series/Travel.</td></tr>
+            <tr><td><strong>Series Index</strong></td><td class="mono">/series</td><td class="prose"><i>(Baru)</i> Daftar seri kurasi tematik (bukan geografis) &mdash; cara utama JustLeps bercerita lewat pengelompokan sendiri.</td></tr>
+            <tr><td><strong>Series Detail</strong></td><td class="mono">/series/:slug</td><td class="prose"><i>(Baru)</i> Galeri satu seri, foto boleh tumpang tindih dengan Location.</td></tr>
+            <tr><td><strong>Travel Index</strong></td><td class="mono">/travel</td><td class="prose">Daftar lokasi geografis &mdash; eksplorasi berbasis tempat, dipertahankan berdampingan dengan Series.</td></tr>
+            <tr><td><strong>Location Detail</strong></td><td class="mono">/travel/:slug</td><td class="prose">Galeri satu lokasi.</td></tr>
+            <tr><td><strong>Discover</strong></td><td class="mono">/discover</td><td class="prose">Eksplorasi spasial lewat peta &mdash; pintu masuk alternatif untuk pengunjung yang berpikir dalam &ldquo;di mana&rdquo;, bukan &ldquo;seri apa&rdquo;.</td></tr>
+            <tr><td><strong>Blog Index</strong></td><td class="mono">/blog</td><td class="prose">Konteks naratif di balik pemotretan &mdash; kedalaman yang tidak muat di caption Instagram.</td></tr>
+            <tr><td><strong>Blog Post</strong></td><td class="mono">/blog/:slug</td><td class="prose">Satu cerita penuh.</td></tr>
+            <tr><td><strong>About + Contact</strong></td><td class="mono">/about</td><td class="prose">Kepercayaan &amp; konversi &mdash; siapa JustLeps, dan cara menghubungi. Digabung jadi satu halaman (bukan rute terpisah) karena kontennya ringan.</td></tr>
+            <tr><td><strong>Not Found</strong></td><td class="mono">*</td><td class="prose">Jaring pengaman navigasi &mdash; selalu menawarkan jalan kembali, tidak pernah jalan buntu.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="s5">
+      <div class="sec-head"><span class="num mono">05</span><h2>User Flow</h2></div>
+
+      <div class="flow">
+        <h4>Flow A &mdash; Klien potensial menghubungi (Persona: Dinda)</h4>
+        <ol class="flowsteps">
+          <li>Membuka tautan situs dari bio Instagram/story teman &rarr; mendarat di <b>Home</b>, carousel hero langsung menampilkan 5 foto unggulan.</li>
+          <li>Scroll ke <b>Latest Travel/Series</b>, klik satu seri yang relevan dengan kebutuhannya (mis. potret).</li>
+          <li>Di <b>Series Detail</b>, klik satu foto &rarr; <b>Lightbox</b> terbuka, navigasi kiri/kanan untuk lihat lebih banyak dari seri yang sama.</li>
+          <li>Menutup lightbox, klik nav <b>About</b>.</li>
+          <li>Membaca bio singkat, scroll ke section <b>Contact</b> di halaman yang sama.</li>
+          <li>Klik alamat email &rarr; membuka klien email lewat <code class="mono">mailto:</code>, atau klik tombol salin di sebelahnya untuk menyalin alamat langsung (dengan konfirmasi visual) &mdash; email adalah satu-satunya metode kontak (keputusan produk, PRD §10 Q04).</li>
+        </ol>
+      </div>
+
+      <div class="flow">
+        <h4>Flow B &mdash; Menjelajah cerita (Persona: Yoga)</h4>
+        <ol class="flowsteps">
+          <li>Membuka <b>Discover</b> langsung dari nav &mdash; tertarik format peta.</li>
+          <li>Klik pin foto di peta &rarr; masuk ke <b>Location Detail</b> tempat itu.</li>
+          <li>Menjelajah galeri, notice ada tautan &ldquo;Bagian dari seri: ...&rdquo; pada satu foto &rarr; klik &rarr; pindah ke <b>Series Detail</b> terkait.</li>
+          <li>Dari Series Detail, klik tautan &ldquo;Baca ceritanya&rdquo; (kalau ada Blog Post terhubung) &rarr; ke <b>Blog Post</b>.</li>
+          <li>Selesai baca, klik logo untuk kembali ke <b>Home</b>, lanjut menjelajah seri lain.</li>
+        </ol>
+      </div>
+
+      <div class="flow">
+        <h4>Flow C &mdash; JustLeps menambah karya baru (operasional, bukan UI publik)</h4>
+        <ol class="flowsteps">
+          <li>Menambah file foto ke folder aset, isi satu entri baru di <code class="mono">content/photos.json</code> (judul, caption, lokasi/seri).</li>
+          <li>Menjalankan build lokal &mdash; skema tervalidasi otomatis, gagal cepat kalau ada field wajib kosong.</li>
+          <li>Preview lokal untuk cek posisi foto di grid/seri yang relevan.</li>
+          <li><code class="mono">git push</code> &mdash; deploy otomatis ke GitHub Pages.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="s6">
+      <div class="sec-head"><span class="num mono">06</span><h2>Layout per Screen</h2></div>
+
+      <div class="screenblock">
+        <h4>Home</h4>
+        <p class="purpose">Hierarki: Hero &gt; Profil &gt; Teaser konten. Satu primary action per section, tidak berebut.</p>
+        <div class="sb-grid">
+          <div>
+            <h5>Section (atas &rarr; bawah)</h5>
+            <ol>
+              <li>Hero carousel bernotch (5 foto unggulan, autoplay 4.5s, dot manual)</li>
+              <li>Kartu profil (avatar, nama, tagline, 2 social link, 1 CTA)</li>
+              <li>&ldquo;Latest Series&rdquo; &mdash; grid 3&ndash;4 kartu, cover + nama</li>
+              <li>&ldquo;Latest Travel&rdquo; &mdash; grid sama, cross-link ke Series terkait bila ada overlap foto</li>
+            </ol>
+          </div>
+          <div>
+            <h5>Primary action &amp; komponen</h5>
+            <span class="pa-pill">Contact me &rarr; About</span>
+            <ul style="margin-top:12px">
+              <li>HeroCarousel, ProfileCard, SeriesCard/LocationCard grid</li>
+              <li>Semua kartu grid pakai komponen sama (lihat §7) &mdash; konsistensi wajib</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="screenblock">
+        <h4>Series Index &amp; Travel Index</h4>
+        <p class="purpose">Struktur identik satu sama lain (Series = tematik, Travel = geografis) supaya pengunjung belajar polanya sekali.</p>
+        <div class="sb-grid">
+          <div>
+            <h5>Section</h5>
+            <ol>
+              <li>Judul + 1 paragraf intro singkat</li>
+              <li>Grid/List kartu (cover, nama, jumlah foto, negara untuk Travel)</li>
+            </ol>
+          </div>
+          <div>
+            <h5>Primary action &amp; komponen</h5>
+            <span class="pa-pill">Klik kartu &rarr; Detail</span>
+            <ul style="margin-top:12px">
+              <li>SeriesCard / LocationRow</li>
+              <li>Tidak ada filter/search di MVP &mdash; volume foto masih kecil (lihat PRD Q06)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="screenblock">
+        <h4>Series Detail &amp; Location Detail</h4>
+        <p class="purpose">Layar &ldquo;kerja&rdquo; utama &mdash; tempat foto benar-benar dilihat.</p>
+        <div class="sb-grid">
+          <div>
+            <h5>Section</h5>
+            <ol>
+              <li>Breadcrumb kembali + judul + metadata (negara/jumlah foto)</li>
+              <li>Grid foto (PhotoCard), 3 kolom desktop</li>
+              <li>Lightbox overlay saat foto diklik</li>
+            </ol>
+          </div>
+          <div>
+            <h5>Primary action &amp; komponen</h5>
+            <span class="pa-pill">Klik foto &rarr; Lightbox</span>
+            <ul style="margin-top:12px">
+              <li>Gallery grid, PhotoCard, Lightbox (prev/next, caption, tautan silang seri&harr;lokasi)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="screenblock">
+        <h4>Discover</h4>
+        <p class="purpose">Eksplorasi spasial &mdash; peta sebagai pengganti grid, bukan tambahan dekoratif.</p>
+        <div class="sb-grid">
+          <div>
+            <h5>Section</h5>
+            <ol>
+              <li>Peta full-bleed di bawah nav (Leaflet + OSM)</li>
+              <li>Pin foto per lokasi dengan badge jumlah</li>
+            </ol>
+          </div>
+          <div>
+            <h5>Primary action &amp; komponen</h5>
+            <span class="pa-pill">Klik pin &rarr; Location Detail</span>
+            <ul style="margin-top:12px"><li>MapPin (custom marker), zoom control bawaan Leaflet (di-restyle)</li></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="screenblock">
+        <h4>Blog Index &amp; Blog Post</h4>
+        <p class="purpose">Kedalaman naratif &mdash; layout split supaya foto sampul tetap terlihat sambil membaca.</p>
+        <div class="sb-grid">
+          <div>
+            <h5>Section</h5>
+            <ol>
+              <li>Media sticky kiri (cover foto)</li>
+              <li>Kanan: intro + daftar post (badge New) / isi artikel</li>
+            </ol>
+          </div>
+          <div>
+            <h5>Primary action &amp; komponen</h5>
+            <span class="pa-pill">Read &rarr; Blog Post</span>
+            <ul style="margin-top:12px"><li>SplitLayout, BlogRow, Badge</li></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="screenblock">
+        <h4>About + Contact</h4>
+        <p class="purpose">Layar konversi &mdash; satu-satunya tujuan adalah membuat kontak semudah mungkin.</p>
+        <div class="sb-grid">
+          <div>
+            <h5>Section</h5>
+            <ol>
+              <li>Media sticky kiri (portrait/behind-the-scenes)</li>
+              <li>Kartu profil ringkas + kartu social link</li>
+              <li>Paragraf About</li>
+              <li><b>Section Contact</b>: satu ContactMethodRow (email) + tombol salin &mdash; email satu-satunya metode kontak, tidak ada WhatsApp/form pihak ketiga (PRD §10 Q04)</li>
+            </ol>
+          </div>
+          <div>
+            <h5>Primary action &amp; komponen</h5>
+            <span class="pa-pill">Klik/salin kontak</span>
+            <ul style="margin-top:12px"><li>SplitLayout, ContactMethodRow, Toast (konfirmasi salin)</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s7">
+      <div class="sec-head"><span class="num mono">07</span><h2>Component Library</h2></div>
+
+      <p class="note">Contoh render nyata untuk komponen berbasis teks/warna:</p>
+      <div class="demo-row">
+        <button class="btn btn-solid">Contact me</button>
+        <button class="btn btn-outline">View All</button>
+        <button class="btn btn-ghost">Kembali</button>
+        <button class="btn btn-solid" disabled>Contact me</button>
+        <span class="badge badge-new">New</span>
+        <span class="badge badge-count">8 foto</span>
+      </div>
+
+      <ul class="complist">
+        <li class="compitem">
+          <h4>Button / PillLink</h4>
+          <div class="row"><span class="k">Variant</span><span class="v">solid (CTA utama), outline (sekunder), ghost (tersier/navigasi kembali)</span></div>
+          <div class="row"><span class="k">State</span><span class="v">default, hover (border/opacity naik), focus-visible (outline accent-text 2px), disabled (opacity 0.4, no pointer)</span></div>
+        </li>
+        <li class="compitem">
+          <h4>Badge</h4>
+          <div class="row"><span class="k">Variant</span><span class="v">new (post blog terbaru), count (jumlah foto per lokasi/pin peta)</span></div>
+          <div class="row"><span class="k">State</span><span class="v">static &mdash; tidak interaktif, tidak punya state</span></div>
+        </li>
+        <li class="compitem">
+          <h4>PhotoCard</h4>
+          <div class="row"><span class="k">Variant</span><span class="v">grid (aspect-ratio 1:1, dipakai di semua galeri), featured (aspect 4:3, dipakai di hero carousel)</span></div>
+          <div class="row"><span class="k">State</span><span class="v">loading (skeleton shimmer), loaded, hover (overlay judul+lokasi muncul), error (fallback ikon foto pecah + label &ldquo;Gambar tidak bisa dimuat&rdquo;)</span></div>
+        </li>
+        <li class="compitem">
+          <h4>Lightbox</h4>
+          <div class="row"><span class="k">Variant</span><span class="v">single (dipakai di semua galeri)</span></div>
+          <div class="row"><span class="k">State</span><span class="v">closed (opacity 0, pointer-events none, tetap di DOM), open, image-loading (blur-up placeholder), first/last item (sembunyikan tombol prev/next yang tidak relevan)</span></div>
+        </li>
+        <li class="compitem">
+          <h4>SplitLayout</h4>
+          <div class="row"><span class="k">Variant</span><span class="v">media-left (default, dipakai Travel/About/Blog)</span></div>
+          <div class="row"><span class="k">State</span><span class="v">media-crossfade saat item aktif berganti (mis. hover baris lokasi)</span></div>
+        </li>
+        <li class="compitem">
+          <h4>SeriesCard / LocationRow</h4>
+          <div class="row"><span class="k">Variant</span><span class="v">card (grid, dipakai Home &amp; index), row (list padat, dipakai Travel index)</span></div>
+          <div class="row"><span class="k">State</span><span class="v">default, hover (border/media highlight)</span></div>
+        </li>
+        <li class="compitem">
+          <h4>MapPin</h4>
+          <div class="row"><span class="k">Variant</span><span class="v">single-photo, cluster (badge angka saat &gt;1 foto)</span></div>
+          <div class="row"><span class="k">State</span><span class="v">default, hover (scale 1.05), selected (ring accent)</span></div>
+        </li>
+        <li class="compitem">
+          <h4>ContactMethodRow</h4>
+          <div class="row"><span class="k">Variant</span><span class="v">link (<code class="mono">mailto:</code> &mdash; langsung buka klien email), copy (tombol salin alamat ke clipboard, sebagai alternatif kalau klien email tidak terpasang)</span></div>
+          <div class="row"><span class="k">State</span><span class="v">default, hover, copied (label berubah sementara ke &ldquo;Tersalin&rdquo; + ikon centang, 2 detik)</span></div>
+        </li>
+        <li class="compitem">
+          <h4>Toast / Snackbar <span class="note">(baru)</span></h4>
+          <div class="row"><span class="k">Variant</span><span class="v">success (salin berhasil), error (mis. clipboard API diblokir browser)</span></div>
+          <div class="row"><span class="k">State</span><span class="v">enter (slide+fade 200ms), visible (3s), exit</span></div>
+        </li>
+        <li class="compitem">
+          <h4>Skeleton <span class="note">(baru)</span></h4>
+          <div class="row"><span class="k">Variant</span><span class="v">photo (aspect-ratio placeholder), text-line</span></div>
+          <div class="row"><span class="k">State</span><span class="v">pulsing animation, respects <code class="mono">prefers-reduced-motion</code> (jadi statis, bukan hilang)</span></div>
+        </li>
+        <li class="compitem">
+          <h4>EmptyState <span class="note">(baru)</span></h4>
+          <div class="row"><span class="k">Variant</span><span class="v">no-photos (seri/lokasi kosong), no-results</span></div>
+          <div class="row"><span class="k">State</span><span class="v">selalu menyertakan 1 tautan keluar (mis. &ldquo;Lihat semua Series&rdquo;) &mdash; tidak pernah jalan buntu, selaras Prinsip 3</span></div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="s8">
+      <div class="sec-head"><span class="num mono">08</span><h2>State per Screen Kunci</h2></div>
+      <div class="tablewrap">
+        <table class="statetable">
+          <thead><tr><th>State</th><th>Home</th><th>Series/Location Detail</th><th>Discover</th><th>Contact</th></tr></thead>
+          <tbody>
+            <tr><td>Empty</td><td class="prose">Tidak berlaku (selalu ada &ge;1 foto unggulan)</td><td class="prose">EmptyState + tautan ke Series/Travel Index lain</td><td class="prose">Tidak berlaku (lokasi selalu &ge;1 kalau ada foto)</td><td class="prose">Tidak berlaku</td></tr>
+            <tr><td>Loading</td><td class="prose">Skeleton pada hero carousel saat gambar pertama load</td><td class="prose">Skeleton grid (PhotoCard loading &times; N)</td><td class="prose">Skeleton abu-abu di area peta sampai tile OSM pertama termuat</td><td class="prose">Tidak berlaku (tautan statis, tanpa network call)</td></tr>
+            <tr><td>Error</td><td class="prose">Foto gagal load &rarr; PhotoCard fallback, carousel lanjut ke slide berikut</td><td class="prose">Foto individual gagal &rarr; fallback icon, foto lain tetap tampil</td><td class="prose">Tile/JS peta gagal load (offline) &rarr; pesan &ldquo;Peta tidak bisa dimuat&rdquo; + tombol ke Travel Index sebagai alternatif teks</td><td class="prose">Clipboard API diblokir &rarr; Toast error, fallback tampilkan email sebagai teks yang bisa diseleksi manual</td></tr>
+            <tr><td>Success</td><td class="prose">&mdash;</td><td class="prose">&mdash;</td><td class="prose">Pin+peta tampil normal</td><td class="prose">Toast &ldquo;Tersalin&rdquo; setelah klik copy</td></tr>
+            <tr><td>Offline</td><td class="prose">Situs statis, HTML/CSS/JS di-cache browser &rarr; shell tetap tampil; foto yang belum ter-cache gagal load (lihat Error)</td><td class="prose">Sama seperti Home</td><td class="prose">Tile peta baru pasti gagal (butuh network) &mdash; treat sebagai Error di atas</td><td class="prose">Tautan <code class="mono">mailto:</code> tetap bisa diklik (OS yang proses, bukan situs); tombol salin tetap berfungsi tanpa network</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="s9">
+      <div class="sec-head"><span class="num mono">09</span><h2>Responsive Behavior</h2></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Pola</th><th>Mobile (&lt;640px)</th><th>Tablet (640&ndash;1023px)</th><th>Desktop (&ge;1024px)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Navigasi</strong></td><td class="prose">Logo + toggle tema + tombol &ldquo;Menu&rdquo; &rarr; dropdown penuh lebar</td><td class="prose">Sama seperti mobile hingga 860px, lalu nav inline muncul</td><td class="prose">Nav inline penuh (Series/Travel/Discover/Blog/About) + toggle tema</td></tr>
+            <tr><td><strong>Hero carousel</strong></td><td class="prose">Aspect-ratio 4:3, lebar penuh viewport dikurangi padding 16px</td><td class="prose">Sama, max-width 720px terpusat</td><td class="prose">Sama, max-width 720px terpusat &mdash; tidak melebar penuh (foto tetap fokus, bukan viewport-filling)</td></tr>
+            <tr><td><strong>Grid galeri</strong></td><td class="prose">2 kolom</td><td class="prose">2&ndash;3 kolom (breakpoint 760px)</td><td class="prose">3 kolom tetap</td></tr>
+            <tr><td><strong>Split layout (Travel/About/Blog)</strong></td><td class="prose">Ditumpuk vertikal, media di atas (height 260px, tidak sticky)</td><td class="prose">Sama seperti mobile hingga 860px</td><td class="prose">2 kolom, media <code class="mono">position: sticky</code> di kiri</td></tr>
+            <tr><td><strong>Discover map</strong></td><td class="prose">Height <code class="mono">60vh</code>, zoom control diperbesar untuk target sentuh 44px</td><td class="prose">Height <code class="mono">70vh</code></td><td class="prose">Height <code class="mono">calc(100vh - 140px)</code></td></tr>
+            <tr><td><strong>Tipografi</strong></td><td class="prose">Display 34px</td><td class="prose">Display 44px</td><td class="prose">Display 56px (scale penuh, lihat §3)</td></tr>
+            <tr><td><strong>Target sentuh</strong></td><td class="prose">Semua elemen interaktif minimum 44&times;44px, spacing antar target &ge;8px</td><td class="prose">Sama</td><td class="prose">Minimum 32px cukup (mouse presisi tinggi), tapi 44px dipertahankan untuk konsistensi lintas perangkat</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="s10">
+      <div class="sec-head"><span class="num mono">10</span><h2>Accessibility</h2></div>
+
+      <p class="lede">Rasio kontras dihitung dari token aktual di §3 (formula WCAG relative luminance), bukan perkiraan.</p>
+      <div class="contrastrow" style="border-top:none;padding-top:0;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:0.06em">
+        <div>Pasangan</div><div>Contoh</div><div style="text-align:right">Rasio</div>
+      </div>
+      <div class="contrastrow">
+        <div>ink / bg (dark)</div>
+        <div class="cswatch" style="background:#0a0a0b;color:#f5f5f4">Aa &mdash; body text</div>
+        <div class="cratio pass">19.1:1</div>
+      </div>
+      <div class="contrastrow">
+        <div>ink-dim / bg (dark)</div>
+        <div class="cswatch" style="background:#0a0a0b;color:#9a9aa2">Aa &mdash; caption</div>
+        <div class="cratio pass">7.1:1</div>
+      </div>
+      <div class="contrastrow">
+        <div>accent / bg (dark)</div>
+        <div class="cswatch" style="background:#0a0a0b;color:#f6ad55">Aa &mdash; link/label</div>
+        <div class="cratio pass">10.4:1</div>
+      </div>
+      <div class="contrastrow">
+        <div>accent-text / surface (light)</div>
+        <div class="cswatch" style="background:#ffffff;color:#a8591e">Aa &mdash; link/label</div>
+        <div class="cratio pass">5.1:1</div>
+      </div>
+      <div class="contrastrow">
+        <div>accent(raw) / surface (light)</div>
+        <div class="cswatch" style="background:#ffffff;color:#f6ad55">Aa &mdash; GAGAL sbg teks</div>
+        <div class="cratio" style="color:var(--error)">1.9:1</div>
+      </div>
+      <p class="note" style="margin-top:12px">Baris terakhir adalah alasan konkret token <code>--accent-text</code> ada: amber mentah gagal total sebagai warna teks di atas putih. Aturan wajib: <b>accent mentah tidak pernah dipakai sebagai warna teks di mode terang</b> &mdash; hanya untuk isian non-teks (dot, border, ikon dekoratif berukuran cukup besar untuk lolos ambang non-teks 3:1).</p>
+
+      <div class="tok-h">Focus order</div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Screen</th><th>Urutan Tab</th></tr></thead>
+          <tbody>
+            <tr><td>Semua screen</td><td class="prose">Skip-link tersembunyi (&ldquo;Lompat ke konten&rdquo;) &rarr; logo &rarr; nav item (urut kiri&ndash;kanan) &rarr; toggle tema &rarr; tombol Menu (mobile) &rarr; konten utama &rarr; footer</td></tr>
+            <tr><td>Galeri (Series/Location)</td><td class="prose">PhotoCard berurutan sesuai urutan visual grid (kiri&ndash;kanan, atas&ndash;bawah) &mdash; <b>bukan</b> urutan DOM acak dari data JSON</td></tr>
+            <tr><td>Lightbox (saat terbuka)</td><td class="prose">Focus trap: tombol close &rarr; prev &rarr; next &rarr; (loop) &mdash; fokus tidak bisa lolos ke elemen di belakang overlay</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tok-h">Keyboard navigation</div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Konteks</th><th>Tombol</th><th>Aksi</th></tr></thead>
+          <tbody>
+            <tr><td>Lightbox</td><td class="mono">Esc</td><td class="prose">Tutup, kembalikan fokus ke PhotoCard yang membukanya</td></tr>
+            <tr><td>Lightbox</td><td class="mono">&larr; / &rarr;</td><td class="prose">Foto sebelumnya/berikutnya (sudah diimplementasi di kode saat ini)</td></tr>
+            <tr><td>Peta Discover</td><td class="mono">Tab + Enter</td><td class="prose">Pin harus fokusable sebagai elemen native (bukan div biasa) dan Enter = klik</td></tr>
+            <tr><td>Mobile menu</td><td class="mono">Esc</td><td class="prose">Tutup dropdown, fokus kembali ke tombol Menu</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tok-h">Kebutuhan ARIA</div>
+      <ul style="padding-left:20px; font-size:14.5px; color:var(--ink-dim)">
+        <li>Lightbox: <code class="mono">role="dialog"</code> + <code class="mono">aria-modal="true"</code> + <code class="mono">aria-label</code> berisi judul foto aktif.</li>
+        <li>Nav aktif: <code class="mono">aria-current="page"</code> pada link rute yang sedang dibuka.</li>
+        <li>Toast: <code class="mono">role="status"</code> + <code class="mono">aria-live="polite"</code> supaya konfirmasi &ldquo;Tersalin&rdquo; terbaca screen reader tanpa memotong ucapan yang sedang berjalan.</li>
+        <li>Setiap foto: <code class="mono">alt</code> wajib diisi dari field <code class="mono">title</code>/<code class="mono">caption</code> pada data model &mdash; ditegakkan lewat validasi skema build (bukan konvensi lisan).</li>
+        <li>Landmark: <code class="mono">&lt;nav&gt;</code>, <code class="mono">&lt;main&gt;</code>, <code class="mono">&lt;footer&gt;</code> eksplisit di setiap screen (sudah demikian di kode saat ini &mdash; dipertahankan).</li>
+        <li>Peta: kontainer Leaflet diberi <code class="mono">role="application"</code> hanya jika interaksi drag esensial; kalau tidak, sediakan daftar teks lokasi sebagai alternatif non-visual (link tersembunyi ke Travel Index).</li>
+        <li>Toggle tema: <code class="mono">role="switch"</code> + <code class="mono">aria-checked</code> (sudah diimplementasi) &mdash; pertahankan.</li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<footer>JustLepsPhotos Design Brief &middot; v0.1 &middot; Dokumen internal, mendampingi PRD v0.2</footer>
